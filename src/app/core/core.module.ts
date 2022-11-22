@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { PageComponent } from './page/page.component';
-import { CourseItemComponent } from '../courses/course-item/course-item.component';
+import { CourseItemComponent } from '../features/courses/course-item/course-item.component';
 
 @NgModule({
   declarations: [
