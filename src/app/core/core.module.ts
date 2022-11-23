@@ -13,5 +13,6 @@ import { CourseItemComponent } from '../features/courses/course-item/course-item
     CourseItemComponent,
   ],
   imports: [CommonModule],
+  exports: [HeaderComponent, FooterComponent, PageComponent],
 })
 export class CoreModule {}
