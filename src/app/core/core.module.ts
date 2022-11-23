@@ -4,6 +4,7 @@ import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { PageComponent } from './page/page.component';
 import { CourseItemComponent } from '../features/courses/course-item/course-item.component';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -12,7 +13,7 @@ import { CourseItemComponent } from '../features/courses/course-item/course-item
     PageComponent,
     CourseItemComponent,
   ],
-  imports: [CommonModule],
+  imports: [CommonModule, SharedModule],
   exports: [HeaderComponent, FooterComponent, PageComponent],
 })
 export class CoreModule {}
