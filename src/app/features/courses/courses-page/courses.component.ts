@@ -16,4 +16,11 @@ export class CoursesComponent {
       description: 'static description',
     },
   ];
+
+  removeItemById(itemId: string) {
+    this.courseItemsList = this.courseItemsList.filter(
+      (item) => item.id !== itemId
+    );
+    console.log(`Remove ${itemId}`);
+  }
 }

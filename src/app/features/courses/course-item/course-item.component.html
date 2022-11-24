@@ -1,14 +1,20 @@
 <div>
   <div>
-    <h3>{{ courseItemData?.title }}</h3>
+    <h3>{{ courseItemData.title }}</h3>
     <div>
-      <p>{{ courseItemData?.duration }}</p>
-      <p>{{ courseItemData?.creationDate?.toLocaleDateString() }}</p>
+      <span class="material-icons">
+        schedule
+      </span>
+      <p>{{ courseItemData.duration }}</p>
+      <span class="material-icons">
+        calendar_today
+      </span>
+      <p>{{ courseItemData.creationDate.toLocaleDateString() }}</p>
     </div>
-    <p>{{ courseItemData?.description }}</p>
+    <p>{{ courseItemData.description }}</p>
   </div>
   <div>
-    <trng-button></trng-button>
-    <trng-button></trng-button>
+    <trng-button [buttonText]="'Edit'" [buttonIconLigature]="'edit'"></trng-button>
+    <trng-button [buttonText]="'Delete'" (click)="deleteItem(courseItemData.id)" [buttonIconLigature]="'delete'"></trng-button>
   </div>
 </div>

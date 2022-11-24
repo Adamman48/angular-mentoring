@@ -8,7 +8,6 @@ import { Component } from '@angular/core';
 export class SearchComponent {
   inputValue = '';
 
-  // TODO: use reusable button somehow
   onButtonClick() {
     console.log(this.inputValue);
   }

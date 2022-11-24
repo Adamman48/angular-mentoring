@@ -3,8 +3,5 @@
   <input 
   type="text"
   [(ngModel)]="inputValue">
-  <button
-    (click)="onButtonClick()">
-    Search
-  </button>
+  <trng-button [buttonText]="'Search'" (click)="onButtonClick()"></trng-button>
 </div>

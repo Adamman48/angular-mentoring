@@ -1,4 +1,7 @@
 <button
   (click)="onButtonClick()">
-  Button
+  <span class="material-icons" *ngIf="!!buttonIconLigature">
+    {{ buttonIconLigature }}
+  </span>
+  {{ buttonText }}
 </button>

@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CourseItemInterface } from 'src/app/core/definitions/courses.feature';
 
 @Component({
@@ -7,5 +7,17 @@ import { CourseItemInterface } from 'src/app/core/definitions/courses.feature';
   styleUrls: ['./course-item.component.scss'],
 })
 export class CourseItemComponent {
-  @Input() courseItemData: CourseItemInterface | null = null;
+  // TODO: resolve default
+  @Input() courseItemData: CourseItemInterface = {
+    id: 'default00',
+    title: 'Default title',
+    creationDate: new Date(),
+    duration: 0,
+    description: 'default description',
+  };
+  @Output() deleteItemEvent = new EventEmitter<string>();
+
+  deleteItem(itemId: string): void {
+    this.deleteItemEvent.emit(itemId);
+  }
 }

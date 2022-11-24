@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'trng-button',
@@ -6,7 +6,11 @@ import { Component } from '@angular/core';
   styleUrls: ['./button.component.scss'],
 })
 export class ButtonComponent {
-  onButtonClick() {
+  @Input() buttonText = 'Push';
+  @Input() buttonIconLigature?: string;
+
+  // TODO: extend or inject possibly
+  onButtonClick(): void {
     console.log('Button clicked');
   }
 }
