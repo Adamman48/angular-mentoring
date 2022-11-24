@@ -1,16 +1,18 @@
 <div>
-  <div>
+  <section class="main-section">
     <h3>{{ courseItemData.title }}</h3>
-    <div>
-      <trng-icon [iconLigature]="IconsEnum.CLOCK"></trng-icon>
-      <p>{{ courseItemData.duration }}</p>
-      <trng-icon [iconLigature]="IconsEnum.CALENDAR"></trng-icon>
-      <p>{{ courseItemData.creationDate.toLocaleDateString() }}</p>
-    </div>
     <p>{{ courseItemData.description }}</p>
-  </div>
-  <div>
-    <trng-button [text]="'Edit'" [iconLigature]="IconsEnum.EDIT"></trng-button>
-    <trng-button [text]="'Delete'" (click)="deleteItem(courseItemData.id)" [iconLigature]="IconsEnum.DELETE"></trng-button>
-  </div>
+  </section>
+  <section class="sub-section">
+    <div class="info">
+      <trng-icon [iconLigature]="IconsEnum.CLOCK"></trng-icon>
+      <span>{{ courseItemData.duration }}</span>
+      <trng-icon [iconLigature]="IconsEnum.CALENDAR"></trng-icon>
+      <span>{{ courseItemData.creationDate.toLocaleDateString() }}</span>
+    </div>
+    <div class="buttons">
+      <trng-button [text]="'Edit'" [iconLigature]="IconsEnum.EDIT"></trng-button>
+      <trng-button [text]="'Delete'" (click)="deleteItem(courseItemData.id)" [iconLigature]="IconsEnum.DELETE"></trng-button>
+    </div>
+  </section>
 </div>
