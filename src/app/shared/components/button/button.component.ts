@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { IconLigaturesEnum } from 'src/app/core/definitions/icons.shared';
 
 @Component({
   selector: 'trng-button',
@@ -6,8 +7,8 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./button.component.scss'],
 })
 export class ButtonComponent {
-  @Input() buttonText = 'Push';
-  @Input() buttonIconLigature?: string;
+  @Input() text = 'Push';
+  @Input() iconLigature?: IconLigaturesEnum;
 
   // TODO: extend or inject possibly
   onButtonClick(): void {

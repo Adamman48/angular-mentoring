@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { CourseItemInterface } from 'src/app/core/definitions/courses.feature';
+import { IconLigaturesEnum } from 'src/app/core/definitions/icons.shared';
 
 @Component({
   selector: 'trng-courses',
@@ -7,6 +8,7 @@ import { CourseItemInterface } from 'src/app/core/definitions/courses.feature';
   styleUrls: ['./courses.component.scss'],
 })
 export class CoursesComponent {
+  readonly IconsEnum = IconLigaturesEnum;
   courseItemsList: CourseItemInterface[] = [
     {
       id: 'staticId',
@@ -18,9 +20,9 @@ export class CoursesComponent {
   ];
 
   removeItemById(itemId: string) {
-    this.courseItemsList = this.courseItemsList.filter(
+    /* this.courseItemsList = this.courseItemsList.filter(
       (item) => item.id !== itemId
-    );
+    ); */
     console.log(`Remove ${itemId}`);
   }
 }

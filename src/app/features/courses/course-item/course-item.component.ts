@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CourseItemInterface } from 'src/app/core/definitions/courses.feature';
+import { IconLigaturesEnum } from 'src/app/core/definitions/icons.shared';
 
 @Component({
   selector: 'trng-course-item',
@@ -7,6 +8,7 @@ import { CourseItemInterface } from 'src/app/core/definitions/courses.feature';
   styleUrls: ['./course-item.component.scss'],
 })
 export class CourseItemComponent {
+  readonly IconsEnum = IconLigaturesEnum;
   // TODO: resolve default
   @Input() courseItemData: CourseItemInterface = {
     id: 'default00',
