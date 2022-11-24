@@ -1,1 +1,10 @@
 /* You can add global styles to this file, and also import other style files */
+html, body {
+  font-family: 'Roboto', serif;
+  height: 100%;
+  margin: 0;
+}
+
+.page {
+  min-height: calc(100vh - 16vh);
+}
