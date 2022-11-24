@@ -1,5 +1,10 @@
 <div>
   <p>search works!</p>
-  <input type="text">
-  <button>Search</button>
+  <input 
+  type="text"
+  [(ngModel)]="inputValue">
+  <button
+    (click)="onButtonClick()">
+    Search
+  </button>
 </div>
