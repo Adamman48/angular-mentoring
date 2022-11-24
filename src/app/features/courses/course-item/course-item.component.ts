@@ -10,6 +10,6 @@ export class CourseItemComponent implements CourseItemInterface {
   id = 'staticId';
   title = 'static title';
   creationDate: Date = new Date();
-  duration = 60;
+  duration = 68;
   description = 'static description';
 }
