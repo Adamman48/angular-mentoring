@@ -1,11 +1,11 @@
 <div>
   <div>
-    <h5>{{ title }}</h5>
+    <h3>{{ courseItemData?.title }}</h3>
     <div>
-      <p>{{ duration }}</p>
-      <p>{{ creationDate.toLocaleDateString() }}</p>
+      <p>{{ courseItemData?.duration }}</p>
+      <p>{{ courseItemData?.creationDate?.toLocaleDateString() }}</p>
     </div>
-    <p>{{ description }}</p>
+    <p>{{ courseItemData?.description }}</p>
   </div>
   <div>
     <trng-button></trng-button>
