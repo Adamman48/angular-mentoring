@@ -1,6 +1,6 @@
 <section class="gryd">
   <trng-search></trng-search>
   <trng-button class="add-btn" [text]="'Add course'" [iconLigature]="IconsEnum.ADD"></trng-button>
-  <trng-course-item [courseItemData]="courseItemsList[0]" (deleteItemEvent)="removeItemById($event)"></trng-course-item>
+  <trng-course-item *ngFor="let item of courseItemsList;trackBy: trackByFn" [courseItemData]="item" (deleteItemEvent)="removeItemById($event)"></trng-course-item>
   <span (click)="onClickMore()">Load more</span>
 </section>
