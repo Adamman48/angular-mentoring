@@ -10,8 +10,5 @@ export class ButtonComponent {
   @Input() text = 'Push';
   @Input() iconLigature?: IconLigaturesEnum;
 
-  // TODO: extend or inject possibly
-  onButtonClick(): void {
-    console.log('Button clicked');
-  }
+  // TODO: extend or inject possibly a default click handler ?
 }

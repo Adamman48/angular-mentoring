@@ -2,7 +2,7 @@ footer {
   background-color: #30323f;
   width: 100%;
   color: #bab9be;
-  height: 8vh;
+  flex-shrink: 0;
 
   span {
     grid-column: 7 / 12;

@@ -1,12 +1,18 @@
 /* You can add global styles to this file, and also import other style files */
-html, body {
-  font-family: 'Roboto', serif;
+html {
   height: 100%;
+}
+
+body {
+  min-height: 100vh;
+  font-family: 'Roboto', serif;
   margin: 0;
+  display: flex;
+  flex-direction: column;
 }
 
 .page {
-  min-height: calc(100vh - 16vh);
+  flex: 1 0 auto;
   background-color: #f5f6fa;
 }
 
