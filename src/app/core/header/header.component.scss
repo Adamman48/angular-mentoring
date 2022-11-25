@@ -6,14 +6,28 @@ header {
 
   .title {
     grid-column: 2 / 4;
+
+    span {
+      position: relative;
+      bottom: 0.5em;
+      color: white;
+    }
   }
 
   .btns {
     grid-column: 9 / 12;
     text-align: right;
 
-    trng-button {
-      margin-left: 2vw;
+    .user-btn, .logout-btn {
+      cursor: pointer;
+      span {
+        position: relative;
+        bottom: 0.5em;
+      }
+    }
+
+    .logout-btn {
+      margin-left: 1vw;
     }
   }
 }

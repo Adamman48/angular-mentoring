@@ -25,4 +25,8 @@ export class CoursesComponent {
     ); */
     console.log(`Remove ${itemId}`);
   }
+
+  onClickMore(): void {
+    console.log('load more');
+  }
 }

@@ -6,4 +6,5 @@ export enum IconLigaturesEnum {
   DELETE = 'delete',
   ADD = 'add_circle_outline',
   LOG_OUT = 'logout',
+  USER = 'person',
 }

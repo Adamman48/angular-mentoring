@@ -14,3 +14,16 @@ trng-course-item {
 .more-btn {
   grid-column: 2 / 12;
 }
+
+section {
+  span {
+    grid-column: 2 / 12;
+    background-color: #ffffff;
+    padding: 1vh;
+    color: blue;
+    text-decoration: underline;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 3px;
+  }
+}

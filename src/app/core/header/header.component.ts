@@ -8,4 +8,8 @@ import { IconLigaturesEnum } from '../definitions/icons.shared';
 })
 export class HeaderComponent {
   readonly IconsEnum = IconLigaturesEnum;
+
+  onLogoutClick(): void {
+    console.log('logged out');
+  }
 }

@@ -4,8 +4,14 @@
     <span>Sailing Courses</span>
   </div>
   <div class="btns">
-    <span>User login</span>
-    <trng-button [text]="'Log out'" [iconLigature]="IconsEnum.LOG_OUT"></trng-button>
+    <span class="user-btn">
+      <trng-icon [iconLigature]="IconsEnum.USER"></trng-icon>
+      <span>User login</span>
+    </span>
+    <span class="logout-btn" (click)="onLogoutClick()">
+      <trng-icon [iconLigature]="IconsEnum.LOG_OUT"></trng-icon>
+      <span>Log out</span>
+    </span>
   </div>
 </header>
 <!-- resolve this -->

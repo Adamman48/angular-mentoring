@@ -2,5 +2,5 @@
   <trng-search></trng-search>
   <trng-button class="add-btn" [text]="'Add course'" [iconLigature]="IconsEnum.ADD"></trng-button>
   <trng-course-item [courseItemData]="courseItemsList[0]" (deleteItemEvent)="removeItemById($event)"></trng-course-item>
-  <trng-button class="more-btn" [text]="'Load more'"></trng-button>
+  <span (click)="onClickMore()">Load more</span>
 </section>
