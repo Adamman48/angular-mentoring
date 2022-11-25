@@ -3,4 +3,23 @@ header {
   background-color: #30323f;
   width: 100%;
   color: #bab9be;
+
+  .title {
+    grid-column: 2 / 4;
+  }
+
+  .btns {
+    grid-column: 9 / 12;
+    text-align: right;
+
+    trng-button {
+      margin-left: 2vw;
+    }
+  }
+}
+
+.breadcrumbs {
+  span {
+    grid-column: 2 / 4;
+  }
 }

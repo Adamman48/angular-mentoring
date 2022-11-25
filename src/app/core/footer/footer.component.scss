@@ -2,6 +2,12 @@ footer {
   background-color: #30323f;
   width: 100%;
   color: #bab9be;
-  height: 5%;
   height: 8vh;
+
+  span {
+    grid-column: 7 / 12;
+    text-align: end;
+    line-height: 8vh;
+    font-size: 0.7em;
+  }
 }

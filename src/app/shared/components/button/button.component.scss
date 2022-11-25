@@ -3,4 +3,10 @@ button {
   border-radius: 3px;
   border: 0;
   color: #feffff;
+  padding: 1vh;
+
+  .btn-with-icon {
+    position: relative;
+    bottom: 0.5em;
+  }
 }

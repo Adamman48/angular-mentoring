@@ -1,6 +1,6 @@
-<div>
+<section class="gryd">
   <trng-search></trng-search>
-  <trng-button [text]="'Add course'" [iconLigature]="IconsEnum.ADD"></trng-button>
+  <trng-button class="add-btn" [text]="'Add course'" [iconLigature]="IconsEnum.ADD"></trng-button>
   <trng-course-item [courseItemData]="courseItemsList[0]" (deleteItemEvent)="removeItemById($event)"></trng-course-item>
-  <trng-button [text]="'Load more'"></trng-button>
-</div>
+  <trng-button class="more-btn" [text]="'Load more'"></trng-button>
+</section>

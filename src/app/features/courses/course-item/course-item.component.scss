@@ -1,0 +1,51 @@
+.item-wrapper {
+  background-color: #ffffff;
+  border-radius: 5px;
+  padding: 4vh;
+  display: block ruby;
+  margin-bottom: 4vh;
+  height: 14vh;
+
+  .main-section {
+    width: 80%;
+    float: left;
+
+    p {
+      font-size: 0.8em;
+    }
+
+    h3 {
+      margin-top: 1vh;
+      margin-bottom: 1vh;
+    }
+  }
+
+  .sub-section {
+    width: 20%;
+
+    div {
+      float: right;
+    }
+
+    .info {
+      margin-bottom: 2vh;
+      color: #9ea2ad;
+
+      span{
+        position: relative;
+        top: -5px;
+        padding-left: 0.5em;
+      }
+    }
+  }
+
+  h3 {
+    margin-top: 0;
+  }
+
+  p {
+    margin-top: 0;
+    margin-bottom: 0;
+    color: #767984;
+  }
+}
