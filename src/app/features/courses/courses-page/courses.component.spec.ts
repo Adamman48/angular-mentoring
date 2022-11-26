@@ -14,13 +14,13 @@ describe('CoursesComponent', () => {
       declarations: [ CoursesComponent, CourseItemComponent ]
     })
     .compileComponents();
-
-    fixture = TestBed.createComponent(CoursesComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
   });
 
   it('should create', () => {
+    fixture = TestBed.createComponent(CoursesComponent);
+    component = fixture.debugElement.componentInstance;
+    fixture.detectChanges();
+    
     expect(component).toBeTruthy();
   });
 });
