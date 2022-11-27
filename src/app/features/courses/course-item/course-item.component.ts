@@ -9,14 +9,7 @@ import { IconLigaturesEnum } from 'src/app/core/definitions/icons.shared';
 })
 export class CourseItemComponent {
   readonly IconsEnum = IconLigaturesEnum;
-  // TODO: resolve default
-  @Input() courseItemData: CourseItemInterface = {
-    id: 'default00',
-    title: 'Default title',
-    creationDate: new Date(),
-    duration: 0,
-    description: 'default description',
-  };
+  @Input() courseItemData!: CourseItemInterface;
   @Output() deleteItemEvent = new EventEmitter<string>();
 
   deleteItem(itemId: string): void {
