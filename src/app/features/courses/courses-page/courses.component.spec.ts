@@ -66,7 +66,8 @@ describe('CoursesComponent', () => {
     expect(compiled.querySelector('trng-button')).toBeTruthy();
   });
 
-  it('should display all course items provided by service', () => {
+  it('should display all course items provided by service and track by itemId', () => {
+    spyOn(component, 'trackByFn');
     let coursesService = fixture.debugElement.injector.get(CoursesService);
 
     fixture.detectChanges();
@@ -74,6 +75,7 @@ describe('CoursesComponent', () => {
     let compiled = fixture.debugElement.nativeElement;
     
     expect(compiled.querySelectorAll('trng-course-item').length).toEqual(coursesService.coursesList.length);
+    expect(component.trackByFn).toHaveBeenCalledWith(0, component.courseItemsList[0]);
   });
 
   it('should display Load more button', () => {
@@ -83,7 +85,7 @@ describe('CoursesComponent', () => {
   });
 
   it('should call onClickMore upon clicking Load more button', fakeAsync(() => {
-    spyOn(component, 'onClickMore');
+    spyOn(console, 'log');
 
     let loadMoreBtn = fixture.debugElement.nativeElement.querySelector('.more-btn');
     loadMoreBtn.click();
@@ -91,17 +93,25 @@ describe('CoursesComponent', () => {
 
     fixture.detectChanges();
 
-    expect(component.onClickMore).toHaveBeenCalled();
+    expect(console.log).toHaveBeenCalledWith('load more');
   }));
 
-  xit('should remove course item by id upon calling removeItemById', fakeAsync(() => {
-    // TODO: use triggerEventHandler to dispatch deleteItemEvent
-    let coursesService = fixture.debugElement.injector.get(CoursesService);
+  it('should remove course item by id upon calling removeItemById', fakeAsync(() => {
+    spyOn(component, 'removeItemById');
+    const coursesDe = fixture.debugElement;
+    let coursesService = coursesDe.injector.get(CoursesService);
 
     fixture.detectChanges();
     
     let compiled = fixture.debugElement.nativeElement;
     
     expect(compiled.querySelectorAll('trng-course-item').length).toEqual(coursesService.coursesList.length);
+
+    coursesDe.queryAll(By.css('trng-course-item'))[0].triggerEventHandler('deleteItemEvent', component.courseItemsList[0].id);
+
+    tick();
+    fixture.detectChanges();
+
+    expect(component.removeItemById).toHaveBeenCalledWith(component.courseItemsList[0].id);
   }));
 });

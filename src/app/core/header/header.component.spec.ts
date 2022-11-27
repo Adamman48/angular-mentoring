@@ -1,4 +1,4 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { SharedModule } from 'src/app/shared/shared.module';
 
 import { HeaderComponent } from './header.component';
@@ -16,10 +16,24 @@ describe('HeaderComponent', () => {
 
     fixture = TestBed.createComponent(HeaderComponent);
     component = fixture.componentInstance;
-    fixture.detectChanges();
   });
 
   it('should create', () => {
+    fixture.detectChanges();
+
     expect(component).toBeTruthy();
   });
+
+  it('should call onLogoutClick upon clicking logout button', fakeAsync(() => {
+    spyOn(console, 'log');
+    fixture.detectChanges();
+
+    let logoutBtn = fixture.debugElement.nativeElement.querySelector('.logout-btn');
+    logoutBtn.click();
+
+    tick();
+    fixture.detectChanges();
+
+    expect(console.log).toHaveBeenCalledWith('logged out');
+  }));
 });

@@ -7,5 +7,5 @@ import { IconLigaturesEnum } from 'src/app/core/definitions/icons.shared';
   styleUrls: ['./icon.component.scss'],
 })
 export class IconComponent {
-  @Input() iconLigature: IconLigaturesEnum = IconLigaturesEnum.DEFAULT;
+  @Input() iconLigature!: IconLigaturesEnum;
 }

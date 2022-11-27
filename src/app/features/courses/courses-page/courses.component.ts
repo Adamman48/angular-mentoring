@@ -11,15 +11,7 @@ import { CoursesService } from '../courses.service';
 })
 export class CoursesComponent {
   readonly IconsEnum = IconLigaturesEnum;
-  courseItemsList: CourseItemInterface[] = [
-    {
-      id: 'staticId',
-      title: 'static title',
-      creationDate: new Date(),
-      duration: 68,
-      description: 'static description',
-    },
-  ];
+  courseItemsList!: CourseItemInterface[];
 
   constructor(private coursesService: CoursesService) {}
 
