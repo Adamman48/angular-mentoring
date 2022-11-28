@@ -1,5 +1,5 @@
 export enum IconLigaturesEnum {
-  DEFAULT = '',
+  STAR = 'star',
   CALENDAR = 'calendar_today',
   CLOCK = 'schedule',
   EDIT = 'edit',

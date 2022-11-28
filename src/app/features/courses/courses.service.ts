@@ -3,6 +3,7 @@ import { CourseItemInterface } from 'src/app/core/definitions/courses.feature';
 export class CoursesService {
   coursesList: CourseItemInterface[] = [
     {
+      isTopRated: true,
       id: 'c1',
       title: 'Hitches',
       creationDate: new Date(),

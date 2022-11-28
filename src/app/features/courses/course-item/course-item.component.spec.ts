@@ -45,8 +45,22 @@ describe('CourseItemComponent', () => {
 
     let compiled = fixture.debugElement.nativeElement;
     
-    expect(compiled.querySelector('.main-section h3').textContent).toBe(mockCourseItemData.title);
+    expect(compiled.querySelector('.main-section h3').textContent).toContain(mockCourseItemData.title);
     expect(compiled.querySelector('.main-section p').textContent).toBe(mockCourseItemData.description);
+  });
+
+  it('should display title with star icon if isTopRated is true', () => {
+    component.courseItemData = {
+      ...mockCourseItemData,
+      isTopRated: true,
+    };
+
+    fixture.detectChanges();
+
+    let compiled = fixture.debugElement.nativeElement;
+
+    expect(compiled.querySelector('.main-section trng-icon')).toBeTruthy();
+    expect(compiled.querySelector('.main-section h3').textContent).toContain('star');
   });
 
   it('should display sub section properly', () => {

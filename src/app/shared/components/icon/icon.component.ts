@@ -8,4 +8,5 @@ import { IconLigaturesEnum } from 'src/app/core/definitions/icons.shared';
 })
 export class IconComponent {
   @Input() iconLigature!: IconLigaturesEnum;
+  @Input() color?: string;
 }

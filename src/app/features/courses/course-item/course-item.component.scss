@@ -1,5 +1,11 @@
+.top-rated-course {
+  background-color: #f8d25354;
+}
+
 .item-wrapper {
-  background-color: #ffffff;
+  &:not(.top-rated-course) {
+    background-color: #ffffff;
+  }
   border-radius: 5px;
   border: 2px rgb(225, 225, 225) solid;
   padding: 3vh;
@@ -18,6 +24,11 @@
     h3 {
       margin-top: 1vh;
       margin-bottom: 1vh;
+
+      trng-icon {
+        position: relative;
+        top: 0.2em;
+      }
     }
   }
 
