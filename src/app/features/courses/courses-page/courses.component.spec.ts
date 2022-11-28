@@ -1,6 +1,7 @@
 import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { CourseBorderByCreationDirective } from '../course-item/course-border.directive';
 import { CourseItemComponent } from '../course-item/course-item.component';
 import { CoursesService } from '../courses.service';
 
@@ -14,7 +15,7 @@ describe('CoursesComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [ SharedModule ],
-      declarations: [ CoursesComponent, CourseItemComponent ],
+      declarations: [ CoursesComponent, CourseItemComponent, CourseBorderByCreationDirective ],
       providers: [ { provide: CoursesService, useValue: coursesServiceStub } ],
     })
     .compileComponents();

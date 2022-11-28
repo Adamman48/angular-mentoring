@@ -1,25 +1,30 @@
+import { DebugElement } from '@angular/core';
 import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { first } from 'rxjs';
 import { CourseItemInterface } from 'src/app/core/definitions/courses.feature';
 import { IconLigaturesEnum } from 'src/app/core/definitions/icons.shared';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { CourseBorderByCreationDirective } from './course-border.directive';
 
 import { CourseItemComponent } from './course-item.component';
 
 describe('CourseItemComponent', () => {
   let component: CourseItemComponent;
   let fixture: ComponentFixture<CourseItemComponent>;
+  let courseItemDe: DebugElement;
   let mockCourseItemData: CourseItemInterface;
+  const oneDayInMs: number = 86400000;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [ SharedModule ],
-      declarations: [ CourseItemComponent ]
+      declarations: [ CourseItemComponent, CourseBorderByCreationDirective ]
     })
     .compileComponents();
 
     fixture = TestBed.createComponent(CourseItemComponent);
     component = fixture.componentInstance;
+    courseItemDe = fixture.debugElement;
 
     mockCourseItemData = {
       creationDate: new Date('1995-12-17T03:24:00'),
@@ -36,6 +41,42 @@ describe('CourseItemComponent', () => {
     fixture.detectChanges();
 
     expect(component).toBeTruthy();
+  });
+
+  it('should add green border if creationDate is more recent than 14 days', () => {
+    component.courseItemData = {
+      ...mockCourseItemData,
+      creationDate: new Date(Date.now() - oneDayInMs),
+    };
+
+    fixture.detectChanges();
+    const borderClr = fixture.debugElement.nativeElement.querySelector('.item-wrapper').style.borderColor;
+    
+    expect(borderClr).toBe('rgb(103, 163, 0)');
+  });
+
+  it('should add blue border if creationDate is a future date', () => {
+    component.courseItemData = {
+      ...mockCourseItemData,
+      creationDate: new Date(Date.now() + oneDayInMs),
+    };
+
+    fixture.detectChanges();
+    const borderClr = courseItemDe.nativeElement.querySelector('.item-wrapper').style.borderColor;
+
+    expect(borderClr).toBe('rgb(1, 158, 204)');
+  });
+
+  it('should have default border color if course is older than 14 days', () => {
+    component.courseItemData = {
+      ...mockCourseItemData,
+      creationDate: new Date(Date.now() - oneDayInMs * 15),
+    };
+
+    fixture.detectChanges();
+    const borderClr = courseItemDe.nativeElement.querySelector('.item-wrapper').style.borderColor;
+
+    expect(borderClr).toBe('');
   });
 
   it('should display main section properly', () => {

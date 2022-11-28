@@ -1,4 +1,4 @@
-<div class="item-wrapper" [ngClass]="{'top-rated-course': courseItemData.isTopRated}">
+<div class="item-wrapper" [ngClass]="{'top-rated-course': courseItemData.isTopRated}" [trngCourseBorderByCreation]="courseItemData.creationDate">
   <section class="main-section">
     <h3>{{ courseItemData.title }}
       <trng-icon *ngIf="courseItemData.isTopRated" [iconLigature]="IconsEnum.STAR" [color]="'yellow'"></trng-icon>
