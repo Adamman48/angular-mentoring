@@ -20,10 +20,14 @@ section {
     grid-column: 2 / 12;
     background-color: #ffffff;
     padding: 1vh;
-    color: blue;
-    text-decoration: underline;
     text-align: center;
-    cursor: pointer;
     border-radius: 3px;
+    border: 2px rgb(225, 225, 225) solid;
+
+    &:not(.no-data-msg) {
+      color: blue;
+      text-decoration: underline;
+      cursor: pointer;
+    }
   }
 }

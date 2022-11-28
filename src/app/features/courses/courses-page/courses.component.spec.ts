@@ -79,12 +79,34 @@ describe('CoursesComponent', () => {
   });
 
   it('should display Load more button', () => {
+    coursesServiceStub.coursesList?.push({
+      id: 'test3',
+      creationDate: new Date(),
+      title: 'test3',
+      duration: 1,
+      description: 'lorem ipsum'
+    });
+    fixture.detectChanges();
     let compiled = fixture.debugElement.nativeElement;
     
     expect(compiled.querySelector('.more-btn').textContent).toBe('Load more');
   });
 
+  it('should not display load more button if fewer than 3 courses are available', () => {
+    let compiled = fixture.debugElement.nativeElement;
+
+    expect(compiled.querySelector('.more-btn')).toBeFalsy();
+  });
+
   it('should call onClickMore upon clicking Load more button', fakeAsync(() => {
+    coursesServiceStub.coursesList?.push({
+      id: 'test3',
+      creationDate: new Date(),
+      title: 'test3',
+      duration: 1,
+      description: 'lorem ipsum'
+    });
+    fixture.detectChanges();
     spyOn(console, 'log');
 
     let loadMoreBtn = fixture.debugElement.nativeElement.querySelector('.more-btn');
