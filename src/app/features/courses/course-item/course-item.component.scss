@@ -24,8 +24,12 @@
   .sub-section {
     width: 20%;
 
-    div {
+    .buttons {
       float: right;
+
+      :nth-child(2) {
+        margin-left: 1vw;
+      }
     }
 
     .info {
@@ -34,8 +38,13 @@
 
       span{
         position: relative;
-        top: -5px;
-        padding-left: 0.5em;
+        bottom: 0.2em;
+        padding-left: 0.2em;
+        font-size: 0.9em;
+      }
+
+      .course-release {
+        float: right;
       }
     }
   }

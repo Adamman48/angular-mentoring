@@ -9,6 +9,7 @@ import { IconLigaturesEnum } from 'src/app/core/definitions/icons.shared';
 export class ButtonComponent {
   @Input() text!: string;
   @Input() iconLigature?: IconLigaturesEnum;
+  @Input() color?: string;
 
   // TODO: extend or inject possibly a default click handler ?
 }

@@ -5,10 +5,14 @@
   </section>
   <section class="sub-section">
     <div class="info">
-      <trng-icon [iconLigature]="IconsEnum.CLOCK"></trng-icon>
-      <span>{{ courseItemData.duration }}</span>
-      <trng-icon [iconLigature]="IconsEnum.CALENDAR"></trng-icon>
-      <span>{{ courseItemData.creationDate.toLocaleDateString() }}</span>
+      <span class="course-duration">
+        <trng-icon [iconLigature]="IconsEnum.CLOCK"></trng-icon>
+        <span>{{ convertMinutes(courseItemData.duration) }}</span>
+      </span>
+      <span class="course-release">
+        <trng-icon [iconLigature]="IconsEnum.CALENDAR"></trng-icon>
+        <span>{{ courseItemData.creationDate.toLocaleDateString() }}</span>
+      </span>
     </div>
     <div class="buttons">
       <trng-button [text]="'Edit'" [iconLigature]="IconsEnum.EDIT"></trng-button>

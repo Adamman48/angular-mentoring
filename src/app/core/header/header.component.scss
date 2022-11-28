@@ -20,9 +20,13 @@ header {
 
     .user-btn, .logout-btn {
       cursor: pointer;
+      position: relative;
+      top: 30%;
+
       span {
         position: relative;
-        bottom: 0.5em;
+        bottom: 0.2em;
+        margin-left: 0.3em;
       }
     }
 

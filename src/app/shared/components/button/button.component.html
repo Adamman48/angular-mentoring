@@ -1,4 +1,4 @@
-<button>
+<button class="background-{{ color || 'default' }}">
   <trng-icon *ngIf="!!iconLigature" [iconLigature]="iconLigature"></trng-icon>
   <span class="btn-text" [ngClass]="{'btn-with-icon': !!iconLigature}">{{ text }}</span>
 </button>

@@ -21,3 +21,13 @@ body {
   display: grid;
   grid-template-columns: repeat(12, 1fr);
 }
+
+.background {
+  &-green {
+    background-color: #67a300;
+  }
+
+  &-default {
+    background-color: #019ecc;
+  }
+}

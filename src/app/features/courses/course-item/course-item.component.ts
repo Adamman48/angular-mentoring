@@ -15,4 +15,8 @@ export class CourseItemComponent {
   deleteItem(itemId: string): void {
     this.deleteItemEvent.emit(itemId);
   }
+
+  convertMinutes(mins: number): string {
+    return `${(mins / 60).toFixed()}h ${mins % 60}m`;
+  }
 }

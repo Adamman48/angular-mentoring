@@ -1,13 +1,17 @@
 button {
-  background-color: #019ecc;
   border-radius: 3px;
   border: 0;
   color: #feffff;
   padding: 1vh;
   cursor: pointer;
 
+  trng-icon {
+    height: 1px;
+  }
+
   .btn-with-icon {
     position: relative;
-    bottom: 0.5em;
+    bottom: 0.2em;
+    margin-left: 0.5em;
   }
 }

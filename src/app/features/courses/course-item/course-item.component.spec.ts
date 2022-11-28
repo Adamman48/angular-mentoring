@@ -56,10 +56,10 @@ describe('CourseItemComponent', () => {
 
     let compiled = fixture.debugElement.nativeElement;
 
-    expect(compiled.querySelectorAll('.sub-section .info trng-icon span')[0].textContent).toContain(IconLigaturesEnum.CLOCK);
-    expect(compiled.querySelectorAll('.sub-section .info span')[1].textContent).toBe(mockCourseItemData.duration.toString());
-    expect(compiled.querySelectorAll('.sub-section .info trng-icon span')[1].textContent).toContain(IconLigaturesEnum.CALENDAR);
-    expect(compiled.querySelectorAll('.sub-section .info span')[3].textContent).toBe(mockCourseItemData.creationDate.toLocaleDateString());
+    expect(compiled.querySelectorAll('.course-duration span')[0].textContent).toContain(IconLigaturesEnum.CLOCK);
+    expect(compiled.querySelectorAll('.course-duration span')[1].textContent).toBe('1h 9m');
+    expect(compiled.querySelectorAll('.course-release span')[0].textContent).toContain(IconLigaturesEnum.CALENDAR);
+    expect(compiled.querySelectorAll('.course-release span')[1].textContent).toBe(mockCourseItemData.creationDate.toLocaleDateString());
     expect(compiled.querySelectorAll('trng-button').length).toBe(2);
   });
 
