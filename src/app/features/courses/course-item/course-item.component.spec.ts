@@ -7,7 +7,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { CourseBorderByCreationDirective } from './course-border.directive';
 
 import { CourseItemComponent } from './course-item.component';
-import { FormatDurationPipe } from './formatDuration.pipe';
+import { FormatDurationPipe } from './format-duration.pipe';
 
 describe('CourseItemComponent', () => {
   let component: CourseItemComponent;

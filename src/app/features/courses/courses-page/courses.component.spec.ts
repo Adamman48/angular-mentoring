@@ -3,7 +3,7 @@ import { By } from '@angular/platform-browser';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { CourseBorderByCreationDirective } from '../course-item/course-border.directive';
 import { CourseItemComponent } from '../course-item/course-item.component';
-import { FormatDurationPipe } from '../course-item/formatDuration.pipe';
+import { FormatDurationPipe } from '../course-item/format-duration.pipe';
 import { CoursesService } from '../courses.service';
 
 import { CoursesComponent } from './courses.component';
