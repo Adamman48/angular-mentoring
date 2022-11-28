@@ -9,11 +9,11 @@
     <div class="info">
       <span class="course-duration">
         <trng-icon [iconLigature]="IconsEnum.CLOCK"></trng-icon>
-        <span>{{ convertMinutes(courseItemData.duration) }}</span>
+        <span>{{ courseItemData.duration | formatDuration }}</span>
       </span>
       <span class="course-release">
         <trng-icon [iconLigature]="IconsEnum.CALENDAR"></trng-icon>
-        <span>{{ courseItemData.creationDate.toLocaleDateString() }}</span>
+        <span>{{ courseItemData.creationDate | date:'MM/dd/Y' }}</span>
       </span>
     </div>
     <div class="buttons">

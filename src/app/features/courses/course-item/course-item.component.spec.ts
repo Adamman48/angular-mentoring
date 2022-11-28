@@ -7,6 +7,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { CourseBorderByCreationDirective } from './course-border.directive';
 
 import { CourseItemComponent } from './course-item.component';
+import { FormatDurationPipe } from './formatDuration.pipe';
 
 describe('CourseItemComponent', () => {
   let component: CourseItemComponent;
@@ -18,7 +19,7 @@ describe('CourseItemComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [ SharedModule ],
-      declarations: [ CourseItemComponent, CourseBorderByCreationDirective ]
+      declarations: [ CourseItemComponent, CourseBorderByCreationDirective, FormatDurationPipe ]
     })
     .compileComponents();
 
@@ -114,8 +115,34 @@ describe('CourseItemComponent', () => {
     expect(compiled.querySelectorAll('.course-duration span')[0].textContent).toContain(IconLigaturesEnum.CLOCK);
     expect(compiled.querySelectorAll('.course-duration span')[1].textContent).toBe('1h 9m');
     expect(compiled.querySelectorAll('.course-release span')[0].textContent).toContain(IconLigaturesEnum.CALENDAR);
-    expect(compiled.querySelectorAll('.course-release span')[1].textContent).toBe(mockCourseItemData.creationDate.toLocaleDateString());
+    expect(compiled.querySelectorAll('.course-release span')[1].textContent).toBe(mockCourseItemData.creationDate.toLocaleDateString('en-US'));
     expect(compiled.querySelectorAll('trng-button').length).toBe(2);
+  });
+
+  it('should display only hours if no there are no remainder minutes in course duration', () => {
+    component.courseItemData = {
+      ...mockCourseItemData,
+      duration: 120,
+    };
+
+    fixture.detectChanges();
+
+    const durationDisplay = courseItemDe.nativeElement.querySelectorAll('.course-duration span')[1];
+
+    expect(durationDisplay.textContent).toBe('2h');
+  });
+
+  it('should display only minutes if duration does not amount to one hour', () => {
+    component.courseItemData = {
+      ...mockCourseItemData,
+      duration: 48,
+    };
+
+    fixture.detectChanges();
+
+    const durationDisplay = courseItemDe.nativeElement.querySelectorAll('.course-duration span')[1];
+
+    expect(durationDisplay.textContent).toBe('48m');
   });
 
   it('should fire deleteItem event with itemId upon clicking delete btn', fakeAsync(() => {

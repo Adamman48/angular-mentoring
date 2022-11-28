@@ -3,6 +3,7 @@ import { By } from '@angular/platform-browser';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { CourseBorderByCreationDirective } from '../course-item/course-border.directive';
 import { CourseItemComponent } from '../course-item/course-item.component';
+import { FormatDurationPipe } from '../course-item/formatDuration.pipe';
 import { CoursesService } from '../courses.service';
 
 import { CoursesComponent } from './courses.component';
@@ -15,7 +16,7 @@ describe('CoursesComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [ SharedModule ],
-      declarations: [ CoursesComponent, CourseItemComponent, CourseBorderByCreationDirective ],
+      declarations: [ CoursesComponent, CourseItemComponent, CourseBorderByCreationDirective, FormatDurationPipe ],
       providers: [ { provide: CoursesService, useValue: coursesServiceStub } ],
     })
     .compileComponents();
