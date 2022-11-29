@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {
   CourseItemInterface,
   OrderEnum,
@@ -12,7 +12,7 @@ import { CoursesService } from '../courses.service';
   styleUrls: ['./courses.component.scss'],
   providers: [CoursesService],
 })
-export class CoursesComponent {
+export class CoursesComponent implements OnInit {
   readonly IconsEnum = IconLigaturesEnum;
   readonly OrderByEnum = OrderEnum;
   courseItemsList!: CourseItemInterface[];
