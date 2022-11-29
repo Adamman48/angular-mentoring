@@ -1,6 +1,5 @@
 <section class="gryd">
-  <!-- add search event handler -->
-  <trng-search></trng-search>
+  <trng-search (inputChangeEvent)="filterCoursesBySearchInput($event)"></trng-search>
   <trng-button class="add-btn" [text]="'Add course'" [iconLigature]="IconsEnum.ADD"></trng-button>
   <trng-course-item *ngFor="let item of courseItemsList | orderBy:'creationDate':OrderByEnum.DESCENDING;trackBy: trackByFn" [courseItemData]="item" (deleteItemEvent)="removeItemById($event)"></trng-course-item>
   <!-- should be > 3 later -->

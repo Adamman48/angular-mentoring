@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 
 @Component({
   selector: 'trng-search',
@@ -7,9 +7,9 @@ import { Component } from '@angular/core';
 })
 export class SearchComponent {
   inputValue = '';
-  // TODO: Output the inputValue upon clicking button
+  @Output() inputChangeEvent = new EventEmitter<string>();
 
-  onButtonClick() {
-    console.log(this.inputValue);
+  onSearchButtonClick() {
+    this.inputChangeEvent.emit(this.inputValue);
   }
 }

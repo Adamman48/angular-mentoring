@@ -1,6 +1,8 @@
+import { DebugElement } from '@angular/core';
 import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { CourseItemInterface, OrderEnum } from 'src/app/core/definitions/courses.feature';
+import { SearchFilterPipe } from 'src/app/shared/components/search/search-filter.pipe';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { CourseBorderByCreationDirective } from '../course-item/course-border.directive';
 import { CourseItemComponent } from '../course-item/course-item.component';
@@ -14,6 +16,7 @@ describe('CoursesComponent', () => {
   let component: CoursesComponent;
   let fixture: ComponentFixture<CoursesComponent>;
   let coursesServiceStub: Partial<CoursesService>;
+  let coursesDe: DebugElement;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -24,7 +27,8 @@ describe('CoursesComponent', () => {
     .compileComponents();
 
     fixture = TestBed.createComponent(CoursesComponent);
-    component = fixture.debugElement.componentInstance;
+    coursesDe = fixture.debugElement;
+    component = coursesDe.componentInstance;
 
     coursesServiceStub = {
       coursesList: [
@@ -51,7 +55,7 @@ describe('CoursesComponent', () => {
   });
 
   it('should use CoursesService to get course items', () => {
-    let coursesService = fixture.debugElement.injector.get(CoursesService);
+    let coursesService = coursesDe.injector.get(CoursesService);
 
     fixture.detectChanges();
     
@@ -59,24 +63,24 @@ describe('CoursesComponent', () => {
   });
 
   it('should display search component', () => {
-    let compiled = fixture.debugElement.nativeElement;
+    let compiled = coursesDe.nativeElement;
     
     expect(compiled.querySelector('trng-search')).toBeTruthy();
   });
 
   it('should display Add course button component', () => {
-    let compiled = fixture.debugElement.nativeElement;
+    let compiled = coursesDe.nativeElement;
     
     expect(compiled.querySelector('trng-button')).toBeTruthy();
   });
 
   it('should display all course items provided by service and track by itemId', () => {
     spyOn(component, 'trackByFn');
-    let coursesService = fixture.debugElement.injector.get(CoursesService);
+    let coursesService = coursesDe.injector.get(CoursesService);
 
     fixture.detectChanges();
     
-    let compiled = fixture.debugElement.nativeElement;
+    let compiled = coursesDe.nativeElement;
     
     expect(compiled.querySelectorAll('trng-course-item').length).toEqual(coursesService.coursesList.length);
     expect(component.trackByFn).toHaveBeenCalledWith(0, component.courseItemsList[0]);
@@ -91,13 +95,13 @@ describe('CoursesComponent', () => {
       description: 'lorem ipsum'
     });
     fixture.detectChanges();
-    let compiled = fixture.debugElement.nativeElement;
+    let compiled = coursesDe.nativeElement;
     
     expect(compiled.querySelector('.more-btn').textContent).toBe('Load more');
   });
 
   it('should not display load more button if fewer than 3 courses are available', () => {
-    let compiled = fixture.debugElement.nativeElement;
+    let compiled = coursesDe.nativeElement;
 
     expect(compiled.querySelector('.more-btn')).toBeFalsy();
   });
@@ -113,7 +117,7 @@ describe('CoursesComponent', () => {
     fixture.detectChanges();
     spyOn(console, 'log');
 
-    let loadMoreBtn = fixture.debugElement.nativeElement.querySelector('.more-btn');
+    let loadMoreBtn = coursesDe.nativeElement.querySelector('.more-btn');
     loadMoreBtn.click();
     tick();
 
@@ -124,12 +128,11 @@ describe('CoursesComponent', () => {
 
   it('should remove course item by id upon calling removeItemById', fakeAsync(() => {
     spyOn(component, 'removeItemById');
-    const coursesDe = fixture.debugElement;
     let coursesService = coursesDe.injector.get(CoursesService);
 
     fixture.detectChanges();
     
-    let compiled = fixture.debugElement.nativeElement;
+    let compiled = coursesDe.nativeElement;
     
     expect(compiled.querySelectorAll('trng-course-item').length).toEqual(coursesService.coursesList.length);
 
@@ -141,6 +144,104 @@ describe('CoursesComponent', () => {
     expect(component.removeItemById).toHaveBeenCalledWith(component.courseItemsList[0].id);
   }));
 
+  it('should call filterCoursesBySearchInput upon clicking search button', fakeAsync(() => {
+    const testInput = 'This is the way.';
+    spyOn(component, 'filterCoursesBySearchInput');
+    
+    let inputEl = coursesDe.nativeElement.querySelector('trng-search input');
+    inputEl.value = testInput;
+    inputEl.dispatchEvent(new Event('input'));
+
+    tick();
+    fixture.detectChanges();
+
+    let searchEl = coursesDe.query(By.css('trng-search'));
+    searchEl.triggerEventHandler('inputChangeEvent', testInput);
+
+    tick();
+    fixture.detectChanges();
+
+    expect(component.filterCoursesBySearchInput).toHaveBeenCalledWith(testInput);
+  }));
+
+  // TODO: test searchpipe.transform call
+
+  it('should not call SearchFilterPipe.transform upon clicking search button with empty input field', fakeAsync(() => {
+    const searchPipe = coursesDe.injector.get(SearchFilterPipe);
+    spyOn(searchPipe, 'transform');
+
+    let inputEl = coursesDe.nativeElement.querySelector('trng-search input');
+    inputEl.value = '';
+    inputEl.dispatchEvent(new Event('input'));
+
+    tick();
+    fixture.detectChanges();
+
+    let searchEl = coursesDe.query(By.css('trng-search'));
+    searchEl.triggerEventHandler('inputChangeEvent', '');
+
+    tick();
+    fixture.detectChanges();
+
+    expect(searchPipe.transform).not.toHaveBeenCalled();
+  }));
+
+  describe('SearchFilterPipe', () => {
+    const pipe = new SearchFilterPipe();
+    let mockCoursesList: CourseItemInterface[];
+    let mockStringList: string[];
+
+    beforeEach(() => {
+      mockCoursesList = [{
+        id: 'test3',
+        creationDate: new Date(2021, 11, 23),
+        title: 'test3',
+        duration: 5,
+        description: 'lorem ipsum'
+      },
+      {
+        id: 'test2',
+        creationDate: new Date(2022, 5, 9),
+        title: 'test2',
+        duration: 60,
+        description: 'lorem ipsum'
+      },
+      {
+        id: 'test1',
+        creationDate: new Date(2022, 3, 20),
+        title: 'test1',
+        duration: 10,
+        description: 'lorem ipsum',
+        isTopRated: true,
+      },
+    ];
+
+    mockStringList = [
+      'test1',
+      'test2',
+      'test3',
+    ];
+    });
+
+    it('should filter courses list', () => {
+      const expectedFilteredList = [mockCoursesList[1]];
+
+      expect(pipe.transform(mockCoursesList, '2', 'title')).toEqual(expectedFilteredList);
+    });
+
+    it('should filter courses list by description', () => {
+      const expectedFilteredList = [...mockCoursesList];
+
+      expect(pipe.transform(mockCoursesList, 'lorem', 'description')).toEqual(expectedFilteredList)
+    });
+
+    it('should filter simple string list', () => {
+      const expectedFilteredList = [mockStringList[2]];
+
+      expect(pipe.transform(mockStringList, '3')).toEqual(expectedFilteredList)
+    });
+  });
+  
   describe('OrderByPipe', () => {
     const pipe = new OrderByPipe();
     let mockCoursesList: CourseItemInterface[];

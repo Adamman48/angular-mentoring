@@ -48,7 +48,7 @@ describe('SearchComponent', () => {
   }));
 
   it('should log input value upon clicking search button', fakeAsync(() => {
-    spyOn(console, 'log');
+    spyOn(component.inputChangeEvent, 'emit')
     fixture.detectChanges();
     let inputEl = fixture.debugElement.nativeElement.querySelector('input');
     inputEl.value = testInput;
@@ -63,6 +63,6 @@ describe('SearchComponent', () => {
     tick();
     fixture.detectChanges();
 
-    expect(console.log).toHaveBeenCalledWith(testInput);
+    expect(component.inputChangeEvent.emit).toHaveBeenCalledWith(testInput);
   }));
 });
