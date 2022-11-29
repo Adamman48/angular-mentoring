@@ -16,7 +16,8 @@ import { CoursesService } from '../courses.service';
 export class CoursesComponent implements OnInit {
   readonly IconsEnum = IconLigaturesEnum;
   readonly OrderByEnum = OrderEnum;
-  courseItemsList!: CourseItemInterface[];
+  currentCourseItemsList!: CourseItemInterface[];
+  private courseItemsList!: CourseItemInterface[];
 
   constructor(
     private coursesService: CoursesService,
@@ -25,10 +26,11 @@ export class CoursesComponent implements OnInit {
 
   ngOnInit() {
     this.courseItemsList = this.coursesService.coursesList;
+    this.currentCourseItemsList = this.coursesService.coursesList;
   }
 
   removeItemById(itemId: string): void {
-    this.courseItemsList = this.courseItemsList.filter(
+    this.currentCourseItemsList = this.currentCourseItemsList.filter(
       (item) => item.id !== itemId
     );
     console.log(`Remove ${itemId}`);
@@ -36,11 +38,13 @@ export class CoursesComponent implements OnInit {
 
   filterCoursesBySearchInput(inputValue: string): void {
     if (inputValue) {
-      this.courseItemsList = this.searchPipe.transform(
+      this.currentCourseItemsList = this.searchPipe.transform(
         this.courseItemsList,
         inputValue,
         'title'
       );
+    } else {
+      this.currentCourseItemsList = this.courseItemsList;
     }
   }
 

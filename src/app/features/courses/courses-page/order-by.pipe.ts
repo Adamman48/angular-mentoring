@@ -8,6 +8,7 @@ import {
 
 @Pipe({
   name: 'orderBy',
+  pure: false,
 })
 export class OrderByPipe implements PipeTransform {
   transform(

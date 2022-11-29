@@ -59,7 +59,7 @@ describe('CoursesComponent', () => {
 
     fixture.detectChanges();
     
-    expect(coursesService.coursesList[1]).toEqual(component.courseItemsList[1]);
+    expect(coursesService.coursesList[1]).toEqual(component.currentCourseItemsList[1]);
   });
 
   it('should display search component', () => {
@@ -83,7 +83,7 @@ describe('CoursesComponent', () => {
     let compiled = coursesDe.nativeElement;
     
     expect(compiled.querySelectorAll('trng-course-item').length).toEqual(coursesService.coursesList.length);
-    expect(component.trackByFn).toHaveBeenCalledWith(0, component.courseItemsList[0]);
+    expect(component.trackByFn).toHaveBeenCalledWith(0, component.currentCourseItemsList[0]);
   });
 
   it('should display Load more button', () => {
@@ -136,12 +136,12 @@ describe('CoursesComponent', () => {
     
     expect(compiled.querySelectorAll('trng-course-item').length).toEqual(coursesService.coursesList.length);
 
-    coursesDe.queryAll(By.css('trng-course-item'))[0].triggerEventHandler('deleteItemEvent', component.courseItemsList[0].id);
+    coursesDe.queryAll(By.css('trng-course-item'))[0].triggerEventHandler('deleteItemEvent', component.currentCourseItemsList[0].id);
 
     tick();
     fixture.detectChanges();
 
-    expect(component.removeItemById).toHaveBeenCalledWith(component.courseItemsList[0].id);
+    expect(component.removeItemById).toHaveBeenCalledWith(component.currentCourseItemsList[0].id);
   }));
 
   it('should call filterCoursesBySearchInput upon clicking search button', fakeAsync(() => {
