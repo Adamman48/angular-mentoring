@@ -6,3 +6,8 @@ export interface CourseItemInterface {
   description: string;
   isTopRated?: boolean;
 }
+
+export enum OrderEnum {
+  ASCENDING = 'asc',
+  DESCENDING = 'desc',
+}

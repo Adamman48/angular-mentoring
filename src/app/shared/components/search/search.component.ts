@@ -7,6 +7,7 @@ import { Component } from '@angular/core';
 })
 export class SearchComponent {
   inputValue = '';
+  // TODO: Output the inputValue upon clicking button
 
   onButtonClick() {
     console.log(this.inputValue);

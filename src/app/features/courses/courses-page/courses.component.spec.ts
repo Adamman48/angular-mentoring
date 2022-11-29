@@ -1,5 +1,6 @@
 import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
+import { CourseItemInterface, OrderEnum } from 'src/app/core/definitions/courses.feature';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { CourseBorderByCreationDirective } from '../course-item/course-border.directive';
 import { CourseItemComponent } from '../course-item/course-item.component';
@@ -7,6 +8,7 @@ import { FormatDurationPipe } from '../course-item/format-duration.pipe';
 import { CoursesService } from '../courses.service';
 
 import { CoursesComponent } from './courses.component';
+import { OrderByPipe } from './order-by.pipe';
 
 describe('CoursesComponent', () => {
   let component: CoursesComponent;
@@ -16,7 +18,7 @@ describe('CoursesComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [ SharedModule ],
-      declarations: [ CoursesComponent, CourseItemComponent, CourseBorderByCreationDirective, FormatDurationPipe ],
+      declarations: [ CoursesComponent, CourseItemComponent, CourseBorderByCreationDirective, FormatDurationPipe, OrderByPipe ],
       providers: [ { provide: CoursesService, useValue: coursesServiceStub } ],
     })
     .compileComponents();
@@ -28,16 +30,16 @@ describe('CoursesComponent', () => {
       coursesList: [
         {
           id: 'test1',
-          creationDate: new Date(),
+          creationDate: new Date(2022, 3, 20),
           title: 'test1',
-          duration: 1,
+          duration: 10,
           description: 'lorem ipsum'
         },
         {
           id: 'test2',
-          creationDate: new Date(),
+          creationDate: new Date(2022, 5, 9),
           title: 'test2',
-          duration: 1,
+          duration: 60,
           description: 'lorem ipsum'
         },
       ]
@@ -138,4 +140,65 @@ describe('CoursesComponent', () => {
 
     expect(component.removeItemById).toHaveBeenCalledWith(component.courseItemsList[0].id);
   }));
+
+  describe('OrderByPipe', () => {
+    const pipe = new OrderByPipe();
+    let mockCoursesList: CourseItemInterface[];
+
+    beforeEach(() => {
+      mockCoursesList = [{
+            id: 'test3',
+            creationDate: new Date(2021, 11, 23),
+            title: 'test3',
+            duration: 5,
+            description: 'lorem ipsum'
+          },
+          {
+            id: 'test2',
+            creationDate: new Date(2022, 5, 9),
+            title: 'test2',
+            duration: 60,
+            description: 'lorem ipsum'
+          },
+          {
+            id: 'test1',
+            creationDate: new Date(2022, 3, 20),
+            title: 'test1',
+            duration: 10,
+            description: 'lorem ipsum',
+            isTopRated: true,
+          },
+      ];
+    });
+
+    it('should order course items by descending order by default', () => {
+      const expectedOrderedList = [mockCoursesList[1], mockCoursesList[2], mockCoursesList[0]];
+
+      expect(pipe.transform(mockCoursesList, 'duration')).toEqual(expectedOrderedList);
+    });
+
+    it('should order course items by ascending order', () => {
+      const expectedOrderedList = [mockCoursesList[0], mockCoursesList[2], mockCoursesList[1]];
+
+      expect(pipe.transform(mockCoursesList, 'duration', OrderEnum.ASCENDING)).toEqual(expectedOrderedList);
+    });
+
+    it('should order course items by descending order', () => {
+      const expectedOrderedList = [mockCoursesList[1], mockCoursesList[2], mockCoursesList[0]];
+
+      expect(pipe.transform(mockCoursesList, 'duration', OrderEnum.DESCENDING)).toEqual(expectedOrderedList);
+    });
+
+    it('should order properly by creationDate', () => {
+      const expectedOrderedList = [mockCoursesList[0], mockCoursesList[2], mockCoursesList[1]];
+
+      expect(pipe.transform(mockCoursesList, 'creationDate', OrderEnum.ASCENDING)).toEqual(expectedOrderedList);
+    });
+
+    it('should order properly by title', () => {
+      const expectedOrderedList = [mockCoursesList[2], mockCoursesList[1], mockCoursesList[0]];
+
+      expect(pipe.transform(mockCoursesList, 'title', OrderEnum.ASCENDING)).toEqual(expectedOrderedList);
+    });
+  });
 });

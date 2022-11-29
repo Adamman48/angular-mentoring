@@ -5,6 +5,7 @@ import { CourseItemComponent } from './course-item/course-item.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { CourseBorderByCreationDirective } from './course-item/course-border.directive';
 import { FormatDurationPipe } from './course-item/format-duration.pipe';
+import { OrderByPipe } from './courses-page/order-by.pipe';
 
 @NgModule({
   declarations: [
@@ -12,6 +13,7 @@ import { FormatDurationPipe } from './course-item/format-duration.pipe';
     CourseItemComponent,
     CourseBorderByCreationDirective,
     FormatDurationPipe,
+    OrderByPipe,
   ],
   imports: [CommonModule, SharedModule],
 })

@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
-import { CourseItemInterface } from 'src/app/core/definitions/courses.feature';
+import {
+  CourseItemInterface,
+  OrderEnum,
+} from 'src/app/core/definitions/courses.feature';
 import { IconLigaturesEnum } from 'src/app/core/definitions/icons.shared';
 import { CoursesService } from '../courses.service';
 
@@ -11,12 +14,12 @@ import { CoursesService } from '../courses.service';
 })
 export class CoursesComponent {
   readonly IconsEnum = IconLigaturesEnum;
+  readonly OrderByEnum = OrderEnum;
   courseItemsList!: CourseItemInterface[];
 
   constructor(private coursesService: CoursesService) {}
 
   ngOnInit() {
-    console.log('ON INIT');
     this.courseItemsList = this.coursesService.coursesList;
   }
 
@@ -27,39 +30,13 @@ export class CoursesComponent {
     console.log(`Remove ${itemId}`);
   }
 
+  // TODO: Add search event handler
+
   onClickMore(): void {
     console.log('load more');
   }
 
   trackByFn(index: number, item: CourseItemInterface): string {
     return item.id;
-  }
-
-  ngOnChanges() {
-    console.log('ON_CHANGES');
-  }
-
-  ngDoCheck() {
-    console.log('DO_CHECK');
-  }
-
-  ngAfterContentInit() {
-    console.log('AFTER_CONTENT_INIT');
-  }
-
-  ngAfterContentChecked() {
-    console.log('AFTER_CONTENT_CHECKED');
-  }
-
-  ngAfterViewInit() {
-    console.log('AFTER_VIEW_INIT');
-  }
-
-  ngAfterViewChecked() {
-    console.log('AFTER_VIEW_CHECKED');
-  }
-
-  ngOnDestroy() {
-    console.log('ON_DESTROY');
   }
 }
