@@ -25,7 +25,7 @@ export class OrderByPipe implements PipeTransform {
     });
   }
 
-  private handleSortData(dataA: any, dataB: any): any {
+  private handleSortData(dataA: any, dataB: any): number {
     if (dataA instanceof Date) {
       return this.convertDateToEpoch(dataA) - this.convertDateToEpoch(dataB);
     } else if (typeof dataA === 'number') {
