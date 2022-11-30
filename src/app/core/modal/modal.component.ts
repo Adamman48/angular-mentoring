@@ -8,9 +8,21 @@ import { ModalConfigInterface } from '../definitions/modal.core';
 })
 export class ModalComponent {
   @Input() isOpened = false;
-  @Input() modalData!: ModalConfigInterface;
+  @Input() modalConfig!: ModalConfigInterface;
 
-  private toggleModal() {
+  handleSuccessBtnClick() {
+    const {
+      successClickHandlerData: { callback = null, callbackArgs = [] } = {},
+    } = this.modalConfig;
+
+    if (callback && !callbackArgs.length) {
+      callback();
+    } else if (callback && callbackArgs.length) {
+      callback(...callbackArgs);
+    }
+  }
+
+  toggleModal() {
     this.isOpened = !this.isOpened;
   }
 }

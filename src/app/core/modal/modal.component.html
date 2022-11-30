@@ -1,10 +1,10 @@
 <div class="modal-wrapper" *ngIf="isOpened">
-  <header>{{ modalData.modalHeader }}</header>
+  <header>{{ modalConfig.modalHeader }}</header>
     <div>
-      <span>{{ modalData.modalMessage }}</span>
+      <span>{{ modalConfig.modalMessage }}</span>
     </div>
   <footer>
-    <trng-button [color]="'white'" [text]="modalData.negativeButtonText || 'Cancel'"></trng-button>
-    <trng-button [color]="'green'" [text]="modalData.positiveButtonText || 'Okay'"></trng-button>
+    <trng-button [color]="'white'" [text]="modalConfig.negativeButtonText || 'Cancel'" (click)="toggleModal"></trng-button>
+    <trng-button [color]="'green'" [text]="modalConfig.positiveButtonText || 'Okay'" (click)="handleSuccessBtnClick"></trng-button>
   </footer>
 </div>

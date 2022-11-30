@@ -1,0 +1,13 @@
+body {
+  background: aqua;
+}
+
+.modal-wrapper {
+  z-index: 9999;
+  height: 30%;
+  width: 30%;
+  position: absolute;
+  top: 15vh;
+  left: 35vw;
+  background-color: white;
+}

@@ -1,0 +1,19 @@
+.page {
+  overflow: scroll;
+  background-color: #f5f6fa;
+  height: calc(100vh - 6vh - 11vh);
+
+  &-modal-opened {
+    overflow-y: hidden;
+    padding-right: 15px;
+  }
+}
+
+.modal-opened-layer {
+  width: 100%;
+  height: 100vh;
+  position: absolute;
+  bottom: 0;
+  background-color: rgb(43 43 43 / 62%);
+  z-index: 9998;
+}
