@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, DoCheck, OnInit } from '@angular/core';
 import {
   CourseItemInterface,
   OrderEnum,
@@ -13,11 +13,12 @@ import { CoursesService } from '../courses.service';
   styleUrls: ['./courses.component.scss'],
   providers: [CoursesService, SearchFilterPipe],
 })
-export class CoursesComponent implements OnInit {
+export class CoursesComponent implements OnInit, DoCheck {
   readonly IconsEnum = IconLigaturesEnum;
   readonly OrderByEnum = OrderEnum;
   currentCourseItemsList!: CourseItemInterface[];
   private courseItemsList!: CourseItemInterface[];
+  searchInputValue = '';
 
   constructor(
     private coursesService: CoursesService,
@@ -29,24 +30,30 @@ export class CoursesComponent implements OnInit {
     this.currentCourseItemsList = this.courseItemsList;
   }
 
-  // TODO: resolve permanent removal
+  ngDoCheck() {
+    const coursesList = this.coursesService.getCourses();
+    if (this.searchInputValue) {
+      this.filterCoursesBySearchInput(this.searchInputValue);
+    } else {
+      this.currentCourseItemsList = coursesList;
+      this.courseItemsList = coursesList;
+    }
+  }
+
   removeItemById(itemId: string): void {
-    this.currentCourseItemsList = this.currentCourseItemsList.filter(
-      (item) => item.id !== itemId
-    );
+    const newCoursesList = this.coursesService.removeCourseById(itemId);
+    this.courseItemsList = newCoursesList;
+
     console.log(`Remove ${itemId}`);
   }
 
   filterCoursesBySearchInput(inputValue: string): void {
-    if (inputValue) {
-      this.currentCourseItemsList = this.searchPipe.transform(
-        this.courseItemsList,
-        inputValue,
-        'title'
-      );
-    } else {
-      this.currentCourseItemsList = this.courseItemsList;
-    }
+    this.searchInputValue = inputValue;
+    this.currentCourseItemsList = this.searchPipe.transform(
+      this.courseItemsList,
+      inputValue,
+      'title'
+    );
   }
 
   onClickMore(): void {

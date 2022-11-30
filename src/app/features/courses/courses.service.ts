@@ -35,7 +35,7 @@ export class CoursesService {
   }
 
   // ! can be used to add and update as well, hence no update is implemented yet
-  /* setCourse(courseItem: CourseItemInterface): CourseItemInterface[] {
+  setCourse(courseItem: CourseItemInterface): CourseItemInterface[] {
     this.coursesList.set(courseItem.id, courseItem);
     return this.getCourses();
   }
@@ -43,14 +43,15 @@ export class CoursesService {
   getCourseById(itemId: string): CourseItemInterface | never {
     const courseItem = this.coursesList.get(itemId);
 
-    if(courseItem) {
+    if (courseItem) {
       return JSON.parse(JSON.stringify(courseItem));
     } else {
       throw new Error('Cannot get course');
     }
   }
 
-  removeCourseById(itemId: string): boolean {
-    return this.coursesList.delete(itemId);
-  } */
+  removeCourseById(itemId: string): CourseItemInterface[] {
+    this.coursesList.delete(itemId);
+    return this.getCourses();
+  }
 }

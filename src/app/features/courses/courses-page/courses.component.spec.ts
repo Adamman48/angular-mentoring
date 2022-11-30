@@ -56,7 +56,8 @@ describe('CoursesComponent', () => {
     fixture = TestBed.createComponent(CoursesComponent);
     coursesDe = fixture.debugElement;
     component = coursesDe.componentInstance;
-    fixture.detectChanges()
+    // ? maybe this is the main culprit
+    fixture.detectChanges();
   });
 
   it('should create', () => {

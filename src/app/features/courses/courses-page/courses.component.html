@@ -1,7 +1,11 @@
 <section class="gryd">
   <trng-search (inputChangeEvent)="filterCoursesBySearchInput($event)"></trng-search>
   <trng-button class="add-btn" [text]="'Add course'" [iconLigature]="IconsEnum.ADD"></trng-button>
-  <trng-course-item *ngFor="let item of currentCourseItemsList | orderBy:'creationDate':OrderByEnum.DESCENDING;trackBy: trackByFn" [courseItemData]="item" (deleteItemEvent)="removeItemById($event)"></trng-course-item>
+  <trng-course-item 
+    *ngFor="let item of currentCourseItemsList |
+        orderBy:'creationDate':OrderByEnum.DESCENDING;
+          trackBy: trackByFn" [courseItemData]="item" (deleteItemEvent)="removeItemById($event)">
+  </trng-course-item>
   <!-- should be > 3 later -->
   <span *ngIf="currentCourseItemsList.length >= 3" class="more-btn" (click)="onClickMore()">Load more</span>
   <span class="no-data-msg" *ngIf="!currentCourseItemsList.length">NO DATA. FEEL FREE TO ADD NEW COURSES</span>

@@ -13,7 +13,6 @@ import { SearchFilterPipe } from './components/search/search-filter.pipe';
     ButtonComponent,
     SearchComponent,
     IconComponent,
-    SearchFilterPipe,
   ],
   imports: [CommonModule, FormsModule],
   exports: [LogoComponent, ButtonComponent, SearchComponent, IconComponent],
