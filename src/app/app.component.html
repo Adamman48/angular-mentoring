@@ -1,8 +1,10 @@
 <trng-header></trng-header>
-<trng-modal [isOpened]="isModalOpened"></trng-modal>
+<trng-modal *ngIf="isModalOpened"
+  [modalConfig]="dummyModalConfig"
+  (closeModalEvent)="handleCloseModalEvent($event)"
+></trng-modal>
 <div [ngClass]="{'modal-opened-layer': isModalOpened}"></div>
 <div class="page" [ngClass]="{'page-modal-opened': isModalOpened}">
-  <!-- react to output event here for modal, header as well -->
   <router-outlet></router-outlet>
 </div>
 <trng-footer></trng-footer>

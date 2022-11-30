@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { ModalConfigInterface } from '../definitions/modal.core';
 
 @Component({
@@ -7,8 +7,8 @@ import { ModalConfigInterface } from '../definitions/modal.core';
   styleUrls: ['./modal.component.scss'],
 })
 export class ModalComponent {
-  @Input() isOpened = false;
   @Input() modalConfig!: ModalConfigInterface;
+  @Output() closeModalEvent = new EventEmitter<boolean>();
 
   handleSuccessBtnClick() {
     const {
@@ -22,7 +22,7 @@ export class ModalComponent {
     }
   }
 
-  toggleModal() {
-    this.isOpened = !this.isOpened;
+  handleCancelBtnClick() {
+    this.closeModalEvent.emit(false);
   }
 }

@@ -1,10 +1,11 @@
-<div class="modal-wrapper" *ngIf="isOpened">
+<div class="modal-wrapper">
   <header>{{ modalConfig.modalHeader }}</header>
     <div>
       <span>{{ modalConfig.modalMessage }}</span>
     </div>
   <footer>
-    <trng-button [color]="'white'" [text]="modalConfig.negativeButtonText || 'Cancel'" (click)="toggleModal"></trng-button>
-    <trng-button [color]="'green'" [text]="modalConfig.positiveButtonText || 'Okay'" (click)="handleSuccessBtnClick"></trng-button>
+    <!-- add output to change opened state in app to close button -->
+    <trng-button [color]="'white'" [text]="modalConfig.negativeButtonText || 'Cancel'" (click)="handleCancelBtnClick()"></trng-button>
+    <trng-button [color]="'green'" [text]="modalConfig.positiveButtonText || 'Okay'" (click)="handleSuccessBtnClick()"></trng-button>
   </footer>
 </div>
