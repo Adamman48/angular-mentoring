@@ -1,0 +1,10 @@
+<div class="modal-wrapper" *ngIf="isOpened">
+  <header>{{ modalData.modalHeader }}</header>
+    <div>
+      <span>{{ modalData.modalMessage }}</span>
+    </div>
+  <footer>
+    <trng-button [color]="'white'" [text]="modalData.negativeButtonText || 'Cancel'"></trng-button>
+    <trng-button [color]="'green'" [text]="modalData.positiveButtonText || 'Okay'"></trng-button>
+  </footer>
+</div>

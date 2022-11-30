@@ -1,6 +1,7 @@
 <trng-header></trng-header>
-<!-- <trng-page></trng-page> -->
+<trng-modal [isOpened]="isModalOpened"></trng-modal>
 <div class="page">
+  <!-- react to output event here for modal, header as well -->
   <router-outlet></router-outlet>
 </div>
 <trng-footer></trng-footer>

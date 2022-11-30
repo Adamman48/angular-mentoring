@@ -19,6 +19,7 @@ export class CoursesComponent implements OnInit, DoCheck {
   currentCourseItemsList!: CourseItemInterface[];
   private courseItemsList!: CourseItemInterface[];
   searchInputValue = '';
+  // TODO: output modal request
 
   constructor(
     private coursesService: CoursesService,
