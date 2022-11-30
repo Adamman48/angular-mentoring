@@ -20,6 +20,7 @@ export class ModalComponent {
     } else if (callback && callbackArgs.length) {
       callback(...callbackArgs);
     }
+    this.handleCancelBtnClick();
   }
 
   handleCancelBtnClick() {
