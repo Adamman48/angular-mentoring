@@ -25,10 +25,11 @@ export class CoursesComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.courseItemsList = this.coursesService.coursesList;
-    this.currentCourseItemsList = this.coursesService.coursesList;
+    this.courseItemsList = this.coursesService.getCourses();
+    this.currentCourseItemsList = this.courseItemsList;
   }
 
+  // TODO: resolve permanent removal
   removeItemById(itemId: string): void {
     this.currentCourseItemsList = this.currentCourseItemsList.filter(
       (item) => item.id !== itemId
