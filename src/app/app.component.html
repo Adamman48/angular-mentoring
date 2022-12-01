@@ -3,8 +3,11 @@
   [modalConfig]="modalConfig"
   (closeModalEvent)="onCloseModalEvent()"
 ></trng-modal>
+<!-- move modal layer to modal component -->
 <div [ngClass]="{'modal-opened-layer': isModalOpened}"></div>
 <div class="page" [ngClass]="{'page-modal-opened': isModalOpened}">
+  <!-- login page with ifAuthenticated condition -->
+  <!-- router-outlet with ifAuthenticated condition as well -->
   <router-outlet (activate)="subscribeToRouterActivate($event)"></router-outlet>
 </div>
 <trng-footer></trng-footer>

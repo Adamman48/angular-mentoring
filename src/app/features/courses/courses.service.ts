@@ -3,6 +3,7 @@ import { CourseItemInterface } from 'src/app/core/definitions/courses.feature';
 
 @Injectable()
 export class CoursesService {
+  // TODO: maybe bind get to resolve testing issue
   private coursesList: Map<string, CourseItemInterface> = new Map()
     .set('c1', {
       isTopRated: true,

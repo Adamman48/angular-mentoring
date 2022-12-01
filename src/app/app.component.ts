@@ -1,7 +1,5 @@
-import { NgComponentOutlet } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, EventEmitter } from '@angular/core';
 import { ModalConfigInterface } from './core/definitions/modal.core';
-import { CoursesComponent } from './features/courses/courses-page/courses.component';
 
 @Component({
   selector: 'trng-root',
@@ -9,14 +7,17 @@ import { CoursesComponent } from './features/courses/courses-page/courses.compon
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
+  isAuthenticated = false;
   isModalOpened = false;
   modalConfig: ModalConfigInterface = {
     modalHeader: 'Choose outcome',
     modalMessage: '',
   };
 
+  // TODO: handle isAuthenticated coming from the header
+
   subscribeToRouterActivate(componentRef: any) {
-    if (componentRef?.openModalEvent) {
+    if (componentRef?.openModalEvent instanceof EventEmitter) {
       componentRef.openModalEvent.subscribe(this.onOpenModalEvent.bind(this));
     }
   }
