@@ -1,5 +1,7 @@
+import { NgComponentOutlet } from '@angular/common';
 import { Component } from '@angular/core';
 import { ModalConfigInterface } from './core/definitions/modal.core';
+import { CoursesComponent } from './features/courses/courses-page/courses.component';
 
 @Component({
   selector: 'trng-root',
@@ -7,19 +9,24 @@ import { ModalConfigInterface } from './core/definitions/modal.core';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  isModalOpened = true;
-  dummyModalConfig: ModalConfigInterface = {
-    modalHeader: 'Delete course?',
-    modalMessage: 'Are you sure you want to delete XY?',
-    positiveButtonText: 'Yes, delete',
-    successClickHandlerData: {
-      callback: (x, y) => console.log('Log this: ' + x + y),
-      callbackArgs: ['It is alive!', 'ALIVE!'],
-    },
+  isModalOpened = false;
+  modalConfig: ModalConfigInterface = {
+    modalHeader: 'Choose outcome',
+    modalMessage: '',
   };
 
-  handleCloseModalEvent(isOpened: boolean): void {
-    this.isModalOpened = isOpened;
+  subscribeToRouterActivate(componentRef: any) {
+    if (componentRef?.openModalEvent) {
+      componentRef.openModalEvent.subscribe(this.onOpenModalEvent.bind(this));
+    }
   }
-  // TODO: handle modal isOpened here
+
+  private onOpenModalEvent(inputModalConfig: ModalConfigInterface) {
+    this.modalConfig = inputModalConfig;
+    this.isModalOpened = true;
+  }
+
+  onCloseModalEvent(): void {
+    this.isModalOpened = false;
+  }
 }

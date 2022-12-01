@@ -1,3 +1,5 @@
+import { EventEmitter } from '@angular/core';
+
 export interface ModalConfigInterface {
   modalHeader: string;
   modalMessage: string;
@@ -9,4 +11,11 @@ export interface ModalConfigInterface {
 export interface ClickHandlerDataInterface {
   callback: (...args: any) => any;
   callbackArgs?: any[];
+}
+
+// TODO: modal content factory
+
+export interface OpenModal {
+  openModalEvent: EventEmitter<ModalConfigInterface>;
+  broadcastOpenModalEvent(modalConfig: ModalConfigInterface): void;
 }

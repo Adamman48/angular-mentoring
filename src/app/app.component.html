@@ -1,10 +1,10 @@
 <trng-header></trng-header>
 <trng-modal *ngIf="isModalOpened"
-  [modalConfig]="dummyModalConfig"
-  (closeModalEvent)="handleCloseModalEvent($event)"
+  [modalConfig]="modalConfig"
+  (closeModalEvent)="onCloseModalEvent()"
 ></trng-modal>
 <div [ngClass]="{'modal-opened-layer': isModalOpened}"></div>
 <div class="page" [ngClass]="{'page-modal-opened': isModalOpened}">
-  <router-outlet></router-outlet>
+  <router-outlet (activate)="subscribeToRouterActivate($event)"></router-outlet>
 </div>
 <trng-footer></trng-footer>

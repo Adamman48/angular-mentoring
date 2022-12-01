@@ -8,9 +8,9 @@ import { ModalConfigInterface } from '../definitions/modal.core';
 })
 export class ModalComponent {
   @Input() modalConfig!: ModalConfigInterface;
-  @Output() closeModalEvent = new EventEmitter<boolean>();
+  @Output() closeModalEvent = new EventEmitter();
 
-  handleSuccessBtnClick() {
+  handleSuccessBtnClick(): void {
     const {
       successClickHandlerData: { callback = null, callbackArgs = [] } = {},
     } = this.modalConfig;
@@ -23,7 +23,7 @@ export class ModalComponent {
     this.handleCancelBtnClick();
   }
 
-  handleCancelBtnClick() {
-    this.closeModalEvent.emit(false);
+  handleCancelBtnClick(): void {
+    this.closeModalEvent.emit();
   }
 }

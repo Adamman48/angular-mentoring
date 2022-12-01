@@ -1,9 +1,19 @@
-import { Component, DoCheck, OnInit } from '@angular/core';
+import {
+  Component,
+  DoCheck,
+  EventEmitter,
+  OnInit,
+  Output,
+} from '@angular/core';
 import {
   CourseItemInterface,
   OrderEnum,
 } from 'src/app/core/definitions/courses.feature';
 import { IconLigaturesEnum } from 'src/app/core/definitions/icons.shared';
+import {
+  ModalConfigInterface,
+  OpenModal,
+} from 'src/app/core/definitions/modal.core';
 import { SearchFilterPipe } from 'src/app/shared/components/search/search-filter.pipe';
 import { CoursesService } from '../courses.service';
 
@@ -13,13 +23,13 @@ import { CoursesService } from '../courses.service';
   styleUrls: ['./courses.component.scss'],
   providers: [CoursesService, SearchFilterPipe],
 })
-export class CoursesComponent implements OnInit, DoCheck {
+export class CoursesComponent implements OnInit, DoCheck, OpenModal {
   readonly IconsEnum = IconLigaturesEnum;
   readonly OrderByEnum = OrderEnum;
   currentCourseItemsList!: CourseItemInterface[];
   private courseItemsList!: CourseItemInterface[];
   searchInputValue = '';
-  // TODO: output modal request
+  @Output() openModalEvent = new EventEmitter<ModalConfigInterface>();
 
   constructor(
     private coursesService: CoursesService,
@@ -42,10 +52,20 @@ export class CoursesComponent implements OnInit, DoCheck {
   }
 
   removeItemById(itemId: string): void {
-    const newCoursesList = this.coursesService.removeCourseById(itemId);
-    this.courseItemsList = newCoursesList;
-
-    console.log(`Remove ${itemId}`);
+    this.broadcastOpenModalEvent({
+      modalHeader: 'Delete course?',
+      modalMessage: `Are you sure you want to delete\n${
+        this.coursesService.getCourseById(itemId).title
+      }`,
+      positiveButtonText: 'Yes, delete',
+      successClickHandlerData: {
+        callback: () => {
+          const newCoursesList = this.coursesService.removeCourseById(itemId);
+          this.courseItemsList = newCoursesList;
+        },
+        callbackArgs: [this.coursesService, this.courseItemsList],
+      },
+    });
   }
 
   filterCoursesBySearchInput(inputValue: string): void {
@@ -59,6 +79,10 @@ export class CoursesComponent implements OnInit, DoCheck {
 
   onClickMore(): void {
     console.log('load more');
+  }
+
+  broadcastOpenModalEvent(modalConfig: ModalConfigInterface): void {
+    this.openModalEvent.emit(modalConfig);
   }
 
   trackByFn(index: number, item: CourseItemInterface): string {
