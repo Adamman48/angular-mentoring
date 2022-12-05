@@ -13,7 +13,7 @@ import { ModalConfigInterface } from './core/definitions/modal.core';
   styleUrls: ['./app.component.scss'],
   providers: [AuthenticationService],
 })
-export class AppComponent implements OnChanges {
+export class AppComponent {
   isAuthenticated = false;
   isModalOpened = false;
   modalConfig: ModalConfigInterface = {
@@ -23,8 +23,7 @@ export class AppComponent implements OnChanges {
 
   constructor(private authService: AuthenticationService) {}
 
-  ngOnChanges(changes: SimpleChanges): void {
-    console.log('CHANGES', changes);
+  ngOnInit(): void {
     this.isAuthenticated = !!this.authService.getUserInfo();
   }
 

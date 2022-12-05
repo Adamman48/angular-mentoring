@@ -1,5 +1,6 @@
 import {
   Directive,
+  Input,
   OnInit,
   TemplateRef,
   ViewContainerRef,
@@ -13,6 +14,8 @@ import { AuthenticationService } from './authentication.service';
 export class IfAuthenticatedDirective implements OnInit {
   private hasView = false;
 
+  @Input() whatever = '';
+
   constructor(
     private templateRef: TemplateRef<any>,
     private viewContainer: ViewContainerRef,
@@ -20,6 +23,7 @@ export class IfAuthenticatedDirective implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    console.log(this.whatever);
     const isAuthenticated = this.authService.getUserInfo() || null;
     if (isAuthenticated && !this.hasView) {
       this.viewContainer.createEmbeddedView(this.templateRef);

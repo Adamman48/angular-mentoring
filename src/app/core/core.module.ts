@@ -7,18 +7,8 @@ import { ModalComponent } from './modal/modal.component';
 import { IfAuthenticatedDirective } from './authentication/ifAuthenticated.directive';
 
 @NgModule({
-  declarations: [
-    HeaderComponent,
-    FooterComponent,
-    ModalComponent,
-    IfAuthenticatedDirective,
-  ],
+  declarations: [HeaderComponent, FooterComponent, ModalComponent],
   imports: [CommonModule, SharedModule],
-  exports: [
-    HeaderComponent,
-    FooterComponent,
-    ModalComponent,
-    IfAuthenticatedDirective,
-  ],
+  exports: [HeaderComponent, FooterComponent, ModalComponent],
 })
 export class CoreModule {}

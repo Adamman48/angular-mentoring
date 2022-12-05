@@ -9,15 +9,15 @@
       <span>Email:</span>
       <span>*required</span>
     </div>
-    <input type="email" placeholder="example@gmail.com">
+    <input type="email" placeholder="example@gmail.com" [(ngModel)]="emailInput">
     <div class="pw">
       <span>Password:</span>
       <span>*required</span>
     </div>
-    <input type="password" placeholder="********">
+    <input type="password" placeholder="********" [(ngModel)]="pwInput">
     <footer>
       <a href="">Forgot password?</a>
-      <trng-button [text]="'Login'" [color]="'green'"></trng-button>
+      <trng-button [text]="'Login'" [color]="'green'" (click)="handleLoginClick()"></trng-button>
     </footer>
   </div>
 </section>
