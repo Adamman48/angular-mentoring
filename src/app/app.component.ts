@@ -1,12 +1,19 @@
-import { Component, EventEmitter } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  OnChanges,
+  SimpleChanges,
+} from '@angular/core';
+import { AuthenticationService } from './core/authentication/authentication.service';
 import { ModalConfigInterface } from './core/definitions/modal.core';
 
 @Component({
   selector: 'trng-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
+  providers: [AuthenticationService],
 })
-export class AppComponent {
+export class AppComponent implements OnChanges {
   isAuthenticated = false;
   isModalOpened = false;
   modalConfig: ModalConfigInterface = {
@@ -14,15 +21,20 @@ export class AppComponent {
     modalMessage: '',
   };
 
-  // TODO: handle isAuthenticated coming from the header
+  constructor(private authService: AuthenticationService) {}
 
-  subscribeToRouterActivate(componentRef: any) {
+  ngOnChanges(changes: SimpleChanges): void {
+    console.log('CHANGES', changes);
+    this.isAuthenticated = !!this.authService.getUserInfo();
+  }
+
+  subscribeToRouterActivate(componentRef: any): void {
     if (componentRef?.openModalEvent instanceof EventEmitter) {
       componentRef.openModalEvent.subscribe(this.onOpenModalEvent.bind(this));
     }
   }
 
-  private onOpenModalEvent(inputModalConfig: ModalConfigInterface) {
+  private onOpenModalEvent(inputModalConfig: ModalConfigInterface): void {
     this.modalConfig = inputModalConfig;
     this.isModalOpened = true;
   }

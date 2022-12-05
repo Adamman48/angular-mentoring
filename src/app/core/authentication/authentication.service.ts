@@ -5,7 +5,6 @@ import { v4 as uuidv4 } from 'uuid';
 
 @Injectable()
 export class AuthenticationService {
-  private isAuthenticated = false;
   private currentUserId: string | null = null;
 
   login(userInfo: Omit<UserEntityInterface, 'id'>): void {
@@ -17,7 +16,6 @@ export class AuthenticationService {
         lastName: userInfo.lastName,
       })
     );
-    this.isAuthenticated = true;
   }
 
   logout(): void {
