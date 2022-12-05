@@ -6,7 +6,7 @@
 <!-- move modal layer to modal component -->
 <div [ngClass]="{'modal-opened-layer': isModalOpened}"></div>
 <div class="page" [ngClass]="{'page-modal-opened': isModalOpened}">
-  <section *ngIf="!isAuthenticated">Login page</section>
+  <trng-login-page *ngIf="!isAuthenticated">Login page</trng-login-page>
   <router-outlet *trngIfAuthenticated (activate)="subscribeToRouterActivate($event)"></router-outlet>
 </div>
 <trng-footer></trng-footer>

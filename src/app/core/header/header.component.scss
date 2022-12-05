@@ -3,6 +3,7 @@ header {
   background-color: #30323f;
   width: 100%;
   color: #bab9be;
+  margin-bottom: 3vh;
 
   .title {
     grid-column: 2 / 4;
@@ -38,6 +39,11 @@ header {
 
 .breadcrumbs {
   height: 3vh;
+  position: absolute;
+  top: 8vh;
+  width: 100%;
+  background: white;
+
   span {
     grid-column: 2 / 4;
   }
