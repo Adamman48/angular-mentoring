@@ -4,7 +4,7 @@ import { first } from 'rxjs';
 import { CourseItemInterface } from 'src/app/core/definitions/courses.feature';
 import { IconLigaturesEnum } from 'src/app/core/definitions/icons.shared';
 import { SharedModule } from 'src/app/shared/shared.module';
-import { CourseBorderByCreationDirective } from './course-border.directive';
+import { CourseBorderByCreationDirective } from '../../../directives/course-border.directive';
 
 import { CourseItemComponent } from './course-item.component';
 import { FormatDurationPipe } from './format-duration.pipe';

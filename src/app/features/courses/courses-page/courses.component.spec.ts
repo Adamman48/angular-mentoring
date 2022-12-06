@@ -4,7 +4,7 @@ import { By } from '@angular/platform-browser';
 import { CourseItemInterface, OrderEnum } from 'src/app/core/definitions/courses.feature';
 import { SearchFilterPipe } from 'src/app/shared/components/search/search-filter.pipe';
 import { SharedModule } from 'src/app/shared/shared.module';
-import { CourseBorderByCreationDirective } from '../course-item/course-border.directive';
+import { CourseBorderByCreationDirective } from '../../../directives/course-border.directive';
 import { CourseItemComponent } from '../course-item/course-item.component';
 import { FormatDurationPipe } from '../course-item/format-duration.pipe';
 import { CoursesService } from '../courses.service';

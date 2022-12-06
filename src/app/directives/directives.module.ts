@@ -1,10 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IfAuthenticatedDirective } from './ifAuthenticated.directive';
+import { CourseBorderByCreationDirective } from './course-border.directive';
 
 @NgModule({
-  declarations: [IfAuthenticatedDirective],
+  declarations: [IfAuthenticatedDirective, CourseBorderByCreationDirective],
   imports: [CommonModule],
-  exports: [IfAuthenticatedDirective],
+  exports: [IfAuthenticatedDirective, CourseBorderByCreationDirective],
 })
 export class DirectivesModule {}
