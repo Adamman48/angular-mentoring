@@ -1,17 +1,10 @@
-import {
-  Component,
-  EventEmitter,
-  OnChanges,
-  SimpleChanges,
-} from '@angular/core';
-import { AuthenticationService } from './core/authentication/authentication.service';
+import { Component, EventEmitter } from '@angular/core';
 import { ModalConfigInterface } from './core/definitions/modal.core';
 
 @Component({
   selector: 'trng-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
-  providers: [AuthenticationService],
 })
 export class AppComponent {
   isAuthenticated = false;
@@ -21,10 +14,8 @@ export class AppComponent {
     modalMessage: '',
   };
 
-  constructor(private authService: AuthenticationService) {}
-
-  ngOnInit(): void {
-    this.isAuthenticated = !!this.authService.getUserInfo();
+  handleAuthChangeEvent(bool: boolean) {
+    this.isAuthenticated = bool;
   }
 
   subscribeToRouterActivate(componentRef: any): void {

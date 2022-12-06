@@ -10,12 +10,14 @@ import { IconLigaturesEnum } from '../definitions/icons.shared';
 })
 export class HeaderComponent {
   readonly IconsEnum = IconLigaturesEnum;
-  @Input() isLoggedIn = false;
+  @Input() isAuthenticated = false;
+  @Output() authChangeEvent = new EventEmitter<boolean>();
 
   constructor(private authService: AuthenticationService) {}
 
   onLogoutClick(): void {
     this.authService.logout();
+    this.authChangeEvent.emit(false);
     console.log('Logout');
   }
 }

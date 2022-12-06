@@ -1,4 +1,4 @@
-<trng-header></trng-header>
+<trng-header (authChangeEvent)="handleAuthChangeEvent($event)" [isAuthenticated]="isAuthenticated"></trng-header>
 <trng-modal *ngIf="isModalOpened"
   [modalConfig]="modalConfig"
   (closeModalEvent)="onCloseModalEvent()"
@@ -6,7 +6,7 @@
 <!-- move modal layer to modal component -->
 <div [ngClass]="{'modal-opened-layer': isModalOpened}"></div>
 <div class="page" [ngClass]="{'page-modal-opened': isModalOpened}">
-  <trng-login-page >Login page</trng-login-page>
-  <router-outlet *trngIfAuthenticated (activate)="subscribeToRouterActivate($event)"></router-outlet>
+  <trng-login-page *trngIfAuthenticated="!isAuthenticated" (authChangeEvent)="handleAuthChangeEvent($event)">Login page</trng-login-page>
+  <router-outlet *trngIfAuthenticated="isAuthenticated" (activate)="subscribeToRouterActivate($event)"></router-outlet>
 </div>
 <trng-footer></trng-footer>

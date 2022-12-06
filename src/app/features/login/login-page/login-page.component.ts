@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { AuthenticationService } from 'src/app/core/authentication/authentication.service';
 
 @Component({
@@ -10,6 +10,7 @@ import { AuthenticationService } from 'src/app/core/authentication/authenticatio
 export class LoginPageComponent {
   emailInput = '';
   pwInput = '';
+  @Output() authChangeEvent = new EventEmitter<boolean>();
 
   constructor(private authService: AuthenticationService) {}
 
@@ -19,7 +20,8 @@ export class LoginPageComponent {
         firstName: 'Din',
         lastName: 'Djarin',
       });
-      console.log('loggen in successfully', this.authService.getUserInfo());
+      this.authChangeEvent.emit(true);
+      console.log('logged in successfully', this.authService.getUserInfo());
     }
   }
 }

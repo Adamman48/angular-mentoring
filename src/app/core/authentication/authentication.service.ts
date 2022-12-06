@@ -1,14 +1,13 @@
 import { Injectable } from '@angular/core';
 import { UserEntityInterface } from '../definitions/user.core';
 
-import { v4 as uuidv4 } from 'uuid';
-
 @Injectable()
 export class AuthenticationService {
+  // ! instead isAuthenticated
   private currentUserId: string | null = null;
 
   login(userInfo: Omit<UserEntityInterface, 'id'>): void {
-    this.currentUserId = uuidv4();
+    this.currentUserId = 'mando';
     localStorage.setItem(
       this.currentUserId,
       JSON.stringify({

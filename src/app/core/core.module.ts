@@ -4,11 +4,11 @@ import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { SharedModule } from '../shared/shared.module';
 import { ModalComponent } from './modal/modal.component';
-import { IfAuthenticatedDirective } from './authentication/ifAuthenticated.directive';
+import { DirectivesModule } from '../directives/directives.module';
 
 @NgModule({
   declarations: [HeaderComponent, FooterComponent, ModalComponent],
-  imports: [CommonModule, SharedModule],
+  imports: [CommonModule, SharedModule, DirectivesModule],
   exports: [HeaderComponent, FooterComponent, ModalComponent],
 })
 export class CoreModule {}
