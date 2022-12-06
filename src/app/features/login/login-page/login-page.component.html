@@ -1,0 +1,23 @@
+<section class="gryd">
+  <div class="login-modal">
+    <header>
+      <h3 class="login-title">
+        Login
+      </h3>
+    </header>
+    <div class="email">
+      <span>Email:</span>
+      <span>*required</span>
+    </div>
+    <input type="email" placeholder="example@gmail.com" [(ngModel)]="emailInput">
+    <div class="pw">
+      <span>Password:</span>
+      <span>*required</span>
+    </div>
+    <input type="password" placeholder="********" [(ngModel)]="pwInput">
+    <footer>
+      <a href="">Forgot password?</a>
+      <trng-button [text]="'Login'" [color]="'green'" (click)="handleLoginClick()"></trng-button>
+    </footer>
+  </div>
+</section>

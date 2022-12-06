@@ -4,7 +4,7 @@ import { By } from '@angular/platform-browser';
 import { CourseItemInterface, OrderEnum } from 'src/app/core/definitions/courses.feature';
 import { SearchFilterPipe } from 'src/app/shared/components/search/search-filter.pipe';
 import { SharedModule } from 'src/app/shared/shared.module';
-import { CourseBorderByCreationDirective } from '../course-item/course-border.directive';
+import { CourseBorderByCreationDirective } from '../../../directives/course-border.directive';
 import { CourseItemComponent } from '../course-item/course-item.component';
 import { FormatDurationPipe } from '../course-item/format-duration.pipe';
 import { CoursesService } from '../courses.service';
@@ -15,10 +15,37 @@ import { OrderByPipe } from './order-by.pipe';
 describe('CoursesComponent', () => {
   let component: CoursesComponent;
   let fixture: ComponentFixture<CoursesComponent>;
-  let coursesServiceStub: Partial<CoursesService>;
   let coursesDe: DebugElement;
+  let coursesServiceStub: Partial<CoursesService>;
 
   beforeEach(async () => {
+    coursesServiceStub = jasmine.createSpyObj('CoursesService', {
+      getCourses: () => [
+        {
+          id: 'test3',
+          creationDate: new Date(2021, 11, 23),
+          title: 'test3',
+          duration: 5,
+          description: 'lorem ipsum'
+        },
+        {
+          id: 'test2',
+          creationDate: new Date(2022, 5, 9),
+          title: 'test2',
+          duration: 60,
+          description: 'lorem ipsum'
+        },
+        {
+          id: 'test1',
+          creationDate: new Date(2022, 3, 20),
+          title: 'test1',
+          duration: 10,
+          description: 'lorem ipsum',
+          isTopRated: true,
+        },
+      ],
+    });
+
     await TestBed.configureTestingModule({
       imports: [ SharedModule ],
       declarations: [ CoursesComponent, CourseItemComponent, CourseBorderByCreationDirective, FormatDurationPipe, OrderByPipe ],
@@ -29,25 +56,8 @@ describe('CoursesComponent', () => {
     fixture = TestBed.createComponent(CoursesComponent);
     coursesDe = fixture.debugElement;
     component = coursesDe.componentInstance;
-
-    coursesServiceStub = {
-      coursesList: [
-        {
-          id: 'test1',
-          creationDate: new Date(2022, 3, 20),
-          title: 'test1',
-          duration: 10,
-          description: 'lorem ipsum'
-        },
-        {
-          id: 'test2',
-          creationDate: new Date(2022, 5, 9),
-          title: 'test2',
-          duration: 60,
-          description: 'lorem ipsum'
-        },
-      ]
-    };
+    // ? maybe this is the main culprit
+    fixture.detectChanges();
   });
 
   it('should create', () => {
@@ -56,10 +66,10 @@ describe('CoursesComponent', () => {
 
   it('should use CoursesService to get course items', () => {
     let coursesService = coursesDe.injector.get(CoursesService);
-
-    fixture.detectChanges();
     
-    expect(coursesService.coursesList[1]).toEqual(component.currentCourseItemsList[1]);
+    fixture.detectChanges();
+
+    expect(coursesService.getCourses()[1]).toEqual(component.currentCourseItemsList[1]);
   });
 
   it('should display search component', () => {
@@ -82,18 +92,19 @@ describe('CoursesComponent', () => {
     
     let compiled = coursesDe.nativeElement;
     
-    expect(compiled.querySelectorAll('trng-course-item').length).toEqual(coursesService.coursesList.length);
+    expect(compiled.querySelectorAll('trng-course-item').length).toEqual(coursesService.getCourses().length);
     expect(component.trackByFn).toHaveBeenCalledWith(0, component.currentCourseItemsList[0]);
   });
 
   it('should display Load more button', () => {
-    coursesServiceStub.coursesList?.push({
+    let coursesService = coursesDe.injector.get(CoursesService);
+    /* coursesService.setCourse({
       id: 'test3',
       creationDate: new Date(),
       title: 'test3',
       duration: 1,
       description: 'lorem ipsum'
-    });
+    }); */
     fixture.detectChanges();
     let compiled = coursesDe.nativeElement;
     
@@ -107,13 +118,14 @@ describe('CoursesComponent', () => {
   });
 
   it('should call onClickMore upon clicking Load more button', fakeAsync(() => {
-    coursesServiceStub.coursesList?.push({
+    let coursesService = coursesDe.injector.get(CoursesService);
+    /* coursesService.setCourse({
       id: 'test3',
       creationDate: new Date(),
       title: 'test3',
       duration: 1,
       description: 'lorem ipsum'
-    });
+    }); */
     fixture.detectChanges();
     spyOn(console, 'log');
 
@@ -134,7 +146,7 @@ describe('CoursesComponent', () => {
     
     let compiled = coursesDe.nativeElement;
     
-    expect(compiled.querySelectorAll('trng-course-item').length).toEqual(coursesService.coursesList.length);
+    expect(compiled.querySelectorAll('trng-course-item').length).toEqual(coursesService.getCourses().length);
 
     coursesDe.queryAll(By.css('trng-course-item'))[0].triggerEventHandler('deleteItemEvent', component.currentCourseItemsList[0].id);
 

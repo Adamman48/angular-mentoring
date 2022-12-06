@@ -4,7 +4,6 @@ import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
   name: 'searchFilter',
-  pure: false,
 })
 export class SearchFilterPipe implements PipeTransform {
   transform(
@@ -12,14 +11,18 @@ export class SearchFilterPipe implements PipeTransform {
     inputValue: string,
     lookupKey?: string
   ): any[] {
-    type ObjectKey = keyof typeof listToFilter;
-    const resolvedKey = lookupKey ? (lookupKey as ObjectKey) : null;
+    if (inputValue) {
+      type ObjectKey = keyof typeof listToFilter;
+      const resolvedKey = lookupKey ? (lookupKey as ObjectKey) : null;
 
-    return listToFilter.filter((listItem) =>
-      resolvedKey
-        ? this.handleCompare(listItem[resolvedKey], inputValue)
-        : this.handleCompare(listItem, inputValue)
-    );
+      return listToFilter.filter((listItem) =>
+        resolvedKey
+          ? this.handleCompare(listItem[resolvedKey], inputValue)
+          : this.handleCompare(listItem, inputValue)
+      );
+    } else {
+      return listToFilter;
+    }
   }
 
   private handleCompare(sourceString: string, subString: string): boolean {

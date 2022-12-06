@@ -1,9 +1,19 @@
-import { Component, OnInit } from '@angular/core';
+import {
+  Component,
+  DoCheck,
+  EventEmitter,
+  OnInit,
+  Output,
+} from '@angular/core';
 import {
   CourseItemInterface,
   OrderEnum,
 } from 'src/app/core/definitions/courses.feature';
 import { IconLigaturesEnum } from 'src/app/core/definitions/icons.shared';
+import {
+  ModalConfigInterface,
+  OpenModal,
+} from 'src/app/core/definitions/modal.core';
 import { SearchFilterPipe } from 'src/app/shared/components/search/search-filter.pipe';
 import { CoursesService } from '../courses.service';
 
@@ -13,11 +23,13 @@ import { CoursesService } from '../courses.service';
   styleUrls: ['./courses.component.scss'],
   providers: [CoursesService, SearchFilterPipe],
 })
-export class CoursesComponent implements OnInit {
+export class CoursesComponent implements OnInit, DoCheck, OpenModal {
   readonly IconsEnum = IconLigaturesEnum;
   readonly OrderByEnum = OrderEnum;
   currentCourseItemsList!: CourseItemInterface[];
   private courseItemsList!: CourseItemInterface[];
+  searchInputValue = '';
+  @Output() openModalEvent = new EventEmitter<ModalConfigInterface>();
 
   constructor(
     private coursesService: CoursesService,
@@ -25,31 +37,52 @@ export class CoursesComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.courseItemsList = this.coursesService.coursesList;
-    this.currentCourseItemsList = this.coursesService.coursesList;
+    this.courseItemsList = this.coursesService.getCourses();
+    this.currentCourseItemsList = this.courseItemsList;
+  }
+
+  ngDoCheck() {
+    const coursesList = this.coursesService.getCourses();
+    if (this.searchInputValue) {
+      this.filterCoursesBySearchInput(this.searchInputValue);
+    } else {
+      this.currentCourseItemsList = coursesList;
+      this.courseItemsList = coursesList;
+    }
   }
 
   removeItemById(itemId: string): void {
-    this.currentCourseItemsList = this.currentCourseItemsList.filter(
-      (item) => item.id !== itemId
-    );
-    console.log(`Remove ${itemId}`);
+    this.broadcastOpenModalEvent({
+      modalHeader: 'Delete course?',
+      modalMessage: `Are you sure you want to delete\n${
+        this.coursesService.getCourseById(itemId).title
+      }`,
+      positiveButtonText: 'Yes, delete',
+      successClickHandlerData: {
+        callback: () => {
+          const newCoursesList = this.coursesService.removeCourseById(itemId);
+          this.courseItemsList = newCoursesList;
+        },
+        callbackArgs: [this.coursesService, this.courseItemsList],
+      },
+    });
   }
 
   filterCoursesBySearchInput(inputValue: string): void {
-    if (inputValue) {
-      this.currentCourseItemsList = this.searchPipe.transform(
-        this.courseItemsList,
-        inputValue,
-        'title'
-      );
-    } else {
-      this.currentCourseItemsList = this.courseItemsList;
-    }
+    this.searchInputValue = inputValue;
+    this.currentCourseItemsList = this.searchPipe.transform(
+      this.courseItemsList,
+      inputValue,
+      'title'
+    );
   }
 
   onClickMore(): void {
     console.log('load more');
+  }
+
+  broadcastOpenModalEvent(modalConfig: ModalConfigInterface): void {
+    this.openModalEvent.emit(modalConfig);
   }
 
   trackByFn(index: number, item: CourseItemInterface): string {

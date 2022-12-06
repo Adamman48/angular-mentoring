@@ -3,7 +3,8 @@
     <trng-logo></trng-logo>
     <span>{{ 'Sailing Courses' | uppercase }}</span>
   </div>
-  <div class="btns">
+  <!-- MI A GECIS FASZ -->
+  <div class="btns" *trngIfAuthenticated="isAuthenticated">
     <span class="user-btn">
       <trng-icon [iconLigature]="IconsEnum.USER"></trng-icon>
       <span>User login</span>
@@ -15,6 +16,6 @@
   </div>
 </header>
 <!-- resolve this -->
-<div class="breadcrumbs gryd">
+<div class="breadcrumbs gryd" *trngIfAuthenticated="isAuthenticated">
   <span>Courses</span>
 </div>
